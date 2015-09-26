@@ -5,6 +5,7 @@ var streamify = require('gulp-streamify');
 var browserify = require('browserify');
 var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
+var sass = require('gulp-sass');
 var gulp = require('gulp');
 var server = require('gulp-webserver');
 
@@ -17,8 +18,16 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest('./public/scripts/'))
 });
 
+gulp.task('sass', function () {
+  gulp.src('./src/styles/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/styles/'));
+});
+
+//watch js files
 gulp.task('watch', function () {
-   gulp.watch('./src/scripts/**/*.js', ['browserify']);
+   gulp.watch('./src/scripts/**/*.js', ['browserify']),
+   gulp.watch('./src/styles/**/*.scss', ['sass']);
 });
 
 //local server localhost:8000
@@ -32,5 +41,5 @@ gulp.task('server', function() {
 });
 
 // Default Task
-gulp.task('default', ['watch', 'browserify', 'server']);
+gulp.task('default', ['server', 'watch', 'browserify']);
 
