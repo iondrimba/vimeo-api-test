@@ -6,7 +6,7 @@ viewHome.init();
 },{"./home":2}],2:[function(require,module,exports){
 function Home() {
 	this.init = function() {
-		console.log('Hello');
+		console.log('Hello World New 22');
 	};
 }
 
