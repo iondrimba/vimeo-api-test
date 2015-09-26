@@ -17,7 +17,11 @@
     "gulp": "^3.9.0",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.4.1",
+    "gulp-webserver": "^0.9.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
   }
 }
