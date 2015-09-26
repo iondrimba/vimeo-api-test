@@ -18,13 +18,14 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest('./public/scripts/'))
 });
 
+//sass - scss task
 gulp.task('sass', function () {
   gulp.src('./src/styles/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/styles/'));
 });
 
-//watch js files
+//watch js scss files
 gulp.task('watch', function () {
    gulp.watch('./src/scripts/**/*.js', ['browserify']),
    gulp.watch('./src/styles/**/*.scss', ['sass']);
