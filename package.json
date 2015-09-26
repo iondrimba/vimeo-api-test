@@ -1,0 +1,19 @@
+{
+  "name": "browserify_sample",
+  "version": "1.0.0",
+  "description": "Browserify Sample + Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CommonJs",
+    "Browserify"
+  ],
+  "author": "Ion Drimba Filho",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^11.2.0",
+    "gulp": "^3.9.0"
+  }
+}
