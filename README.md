@@ -1,2 +1,2 @@
 # Browserify-Gulp-Sample
-Sample config for browserifiy
+Sample config for browserify
