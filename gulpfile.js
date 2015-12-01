@@ -13,6 +13,9 @@ gulp.task('scsslint', require('./tasks/scss-lint.js'));
 //uglify task
 gulp.task('uglify', require('./tasks/uglify.js'));
 
+//imagemmin task
+gulp.task('imagemin', require('./tasks/imagemin.js'));
+
 //sass - scss task
 gulp.task('sass', require('./tasks/sass.js'));
 
@@ -25,4 +28,4 @@ gulp.task('server', require('./tasks/webserver.js'));
 // Default Task
 gulp.task('default', ['server', 'watch', 'browserify']);
 
-gulp.task('travis', ['browserify', 'lint', 'scsslint', 'sass', 'uglify']);
+gulp.task('travis', ['browserify', 'lint', 'scsslint', 'sass', 'imagemin', 'uglify']);
