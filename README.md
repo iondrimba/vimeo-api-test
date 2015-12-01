@@ -8,6 +8,8 @@
 $ git clone https://github.com/iondrimba/Browserify-Gulp-Sample.git
 $ cd Browserify-Gulp-Sample
 $ npm install
+
+$ gulp
 ```
 
 __Includes:__
@@ -17,6 +19,7 @@ __Includes:__
   * CSS
   * Sass
   * ESLint
+  * Scss Lint (Requires Ruby and [scss-lint])
   * Uglify
 
 __Structure:__
@@ -42,3 +45,5 @@ __Structure:__
 │
 └── gulpfile.json
 ````
+
+[scss-lint]:<https://github.com/brigade/scss-lint#installation>
