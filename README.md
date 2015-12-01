@@ -12,58 +12,29 @@ __Includes:__
   * LiveReload
   * CommonJS
   * Javascript
-  * Javascript ES6
-  * CoffeeScript
   * CSS
-  * Stylus
-  * HTML
-  * Jade
-  * React/JSX
-  * Sprite generation
-  * Image optimization
+  * Sass
+  * ESLint
+  * Uglify
 
 __Structure:__
 
 ````bash
-nakedapp
-├── README.md
-├── package.json
-├── .gitignore
-├── Makefile
-├── LICENSE
 ├── public
-│    ├─── images
-│    │    └── icons.png
-│    ├─── app.js
-│    ├─── index.html
-│    └─── app.css
+│    ├─── scripts
+│    ├─── styles
+│    └─── index.html
+│    
 │── src
-│    ├── images
-│    │   └── icons
 │    ├── scripts
-│    │   ├── models
-│    │   ├── shared
-│    │   │   ├── comp
-│    │   │   └── lib
-│    │   ├── views
-│    │   └── app.js
-│    ├── styles
-│    │   ├── shared
-│    │   │   └── comp
-│    │   └── views
-│    └── templates
-│        ├── comp
-│        └── views
-└── build
-    ├── tasks
-    │   ├── browserify.js
-    │   ├── build.js
-    │   ├── clean.js
-    │   ├── images.js
-    │   ├── server.js
-    │   ├── sprites.js
-    │   ├── styles.js
-    │   └── watch.js
-    ├── config.json
-    └── gulpfile.json
+│    └── styles
+├── tasks
+│   ├── browserify.js
+│   ├── eslint.js
+│   ├── clean.js
+│   ├── sass.js
+│   ├── uglify.js
+│   ├── watch.js│   
+│   └── webserver.js
+└── gulpfile.json
 ````
