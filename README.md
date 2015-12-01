@@ -1,5 +1,7 @@
 # Browserify + Gulp Project Template
 
+[![Travis build status](https://travis-ci.org/iondrimba/Browserify-Gulp-Sample.svg?branch=master)](https://travis-ci.org/iondrimba/Browserify-Gulp-Sample)
+
 ### Installation
 
 ```sh
