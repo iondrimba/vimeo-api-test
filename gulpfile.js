@@ -19,6 +19,4 @@ gulp.task('server', require('./tasks/webserver.js'));
 // Default Task
 gulp.task('default', ['server', 'watch', 'browserify']);
 
-gulp.task('travis', ['browserify', 'lint', 'sass', 'watch'], function(done){
-	done();
-});
+gulp.task('travis', ['browserify', 'lint', 'sass']);
