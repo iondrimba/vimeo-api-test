@@ -20,6 +20,7 @@ __Includes:__
   * Sass
   * ESLint
   * Scss Lint (Requires Ruby and [scss-lint])
+  * Imagemin (images optimization)
   * Uglify
 
 __Structure:__

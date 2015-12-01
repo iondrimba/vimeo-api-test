@@ -11,5 +11,5 @@ module.exports = function() {
             }],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest('build/images'));
+        .pipe(gulp.dest('public/images'));
 };
