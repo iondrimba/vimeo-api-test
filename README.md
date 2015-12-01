@@ -30,6 +30,7 @@ __Structure:__
 │── src
 │    ├── scripts
 │    └── styles
+│
 ├── tasks
 │   ├── browserify.js
 │   ├── eslint.js
@@ -38,5 +39,6 @@ __Structure:__
 │   ├── uglify.js
 │   ├── watch.js│   
 │   └── webserver.js
+│
 └── gulpfile.json
 ````
