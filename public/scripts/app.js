@@ -9,9 +9,7 @@ function Home() {
 		console.log('Hello World New 22');
 		var x =1;
 		if(x==='1'){
-
 		}
-		
 	};
 };
 
