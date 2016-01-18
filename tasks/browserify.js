@@ -8,5 +8,5 @@ module.exports =function() {
  
   bundleStream
     .pipe(source('app.js'))    
-    .pipe(gulp.dest('./public/scripts/'))
+    .pipe(gulp.dest('./public/js/'))
 };

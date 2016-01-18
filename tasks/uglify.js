@@ -4,5 +4,5 @@ var uglify = require('gulp-uglify');
 module.exports = function() {
   return gulp.src('public/src/scripts/*.js')
     .pipe(uglify())
-    .pipe(gulp.dest('public/src/scripts'));
+    .pipe(gulp.dest('public/src/js'));
 };

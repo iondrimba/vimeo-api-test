@@ -10,22 +10,25 @@ gulp.task('lint', require('./tasks/eslint.js'));
 //scss lint task
 gulp.task('scsslint', require('./tasks/scss-lint.js'));
 
-//uglify task
+//sass - scss task
+gulp.task('sass', require('./tasks/sass.js'));
+
+//minify JS task
 gulp.task('uglify', require('./tasks/uglify.js'));
 
 //imagemmin task
 gulp.task('imagemin', require('./tasks/imagemin.js'));
 
-//sass - scss task
-gulp.task('sass', require('./tasks/sass.js'));
+//minify html task
+gulp.task('htmlmin', require('./tasks/htmlmin.js'));
 
 //watch js scss files
 gulp.task('watch', require('./tasks/watch.js'));
 
-//local server localhost:8000
-gulp.task('server', require('./tasks/webserver.js'));
+//local server 
+gulp.task('browser-sync', require('./tasks/browserSync.js'));
 
 // Default Task
-gulp.task('default', ['server', 'watch', 'browserify']);
+gulp.task('default', ['lint', 'sass', 'scsslint',  'htmlmin', 'browserify', 'watch', 'browser-sync']);
 
 gulp.task('travis', ['browserify', 'lint', 'scsslint', 'sass', 'imagemin', 'uglify']);

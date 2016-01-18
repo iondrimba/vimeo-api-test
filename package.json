@@ -15,9 +15,11 @@
   "author": "Ion D. Filho",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.11.1",
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
+    "gulp-htmlmin": "^1.3.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-sass": "^2.0.4",
     "gulp-scss-lint": "^0.3.8",
@@ -27,6 +29,7 @@
     "gulp-webserver": "^0.9.1",
     "imagemin-pngquant": "^4.2.0",
     "jquery": "^2.1.4",
+    "nojquery": "^1.0.42",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   },
