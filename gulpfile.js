@@ -1,4 +1,5 @@
 'use strict';
+var Promise = require('es6-promise').Promise;
 var gulp = require('gulp');
 
 // using vinyl-source-stream: 
