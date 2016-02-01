@@ -51,7 +51,7 @@ __Structure:__
 │── src/
 │    ├── scripts/
 │    └── scss/
-│    └── tempplates/
+│    └── templates/
 │── tasks/
 │
 │── .gitignore
