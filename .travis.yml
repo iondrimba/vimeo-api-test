@@ -4,8 +4,8 @@ before_install:
  - gem install sass
  - gem install ruby 
  - gem install scss_lint
- - npm install -g npm@2
  - npm install -g npm
+ - npm install promise
 before_script:
   - npm install -g gulp
 script: gulp travis
