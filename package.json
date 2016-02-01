@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iondrimba/Browserify-Gulp-Sample.git"
+    "url": "git+https://github.com/iondrimba/SPATemplate.git"
   },
   "author": "Ion D. Filho",
   "license": "MIT",
