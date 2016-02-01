@@ -29,13 +29,13 @@ gulp.task('html-min', require('./tasks/html-min.js'));
 gulp.task('post-css', require('./tasks/post-css.js'));
 
 //local server
-gulp.task('browsersync', require('./tasks/browsersync.js'));
+gulp.task('browser-sync', require('./tasks/browser-sync.js'));
 
 // Default Task
-gulp.task('default', ['scsslint', 'sass', 'lint', 'browserify', 'browsersync', 'watch']);
+gulp.task('default', ['scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 'watch']);
 
 // Default Task
-gulp.task('deploy', ['scsslint', 'sass', 'lint', 'browserify', 'browsersync', 'watch', 'html-min']);
+gulp.task('deploy', ['scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 'watch', 'html-min']);
 
 //CI
 gulp.task('travis', ['scsslint', 'sass', 'browserify', 'lint', 'imagemin', 'html-min', 'uglify']);
