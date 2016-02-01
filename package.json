@@ -1,7 +1,7 @@
 {
   "name": "spa_template",
   "version": "0.0.1",
-  "description": "Browserify + Gulp + Backbone SPA Project Template",
+  "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
   "keywords": [
     "SPA",
