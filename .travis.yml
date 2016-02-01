@@ -4,7 +4,7 @@ before_install:
  - gem install sass
  - gem install ruby 
  - gem install scss_lint
+ - npm -g install npm@latest
 before_script:
-  - npm -g install npm@latest
   - npm install -g gulp
 script: gulp travis
