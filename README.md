@@ -19,7 +19,7 @@ __Features:__
  * Module system CommonJs (browserify)
 
 > In order to test if Pushstate is working
-> you have to host it on apache so it can reads the .htaccess file for
+> you have to host it on apache so it can reads the .htaccess file
 
 __Includes:__
   * BrowserSync
