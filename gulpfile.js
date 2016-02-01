@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 
 // using vinyl-source-stream: 
-gulp.task('browserify', require('./tasks/browserify.js'));
+gulp.task('browserify', require('tasks/browserify.js'));
 
 //eslint task
 gulp.task('lint', require('./tasks/eslint.js'));
