@@ -1,27 +1,38 @@
-.sobre {
-  background-color: #00FF00; }
-  .sobre h2 {
-    color: #fff; }
+.header {
+  background-color: red; }
 
-.contato {
-  background-color: #ff00ff; }
-  .contato h2 {
-    color: #fff; }
+.menu {
+  display: block;
+  height: 20px;
+  width: 100%; }
+  .menu a {
+    float: left;
+    margin-right: 10px; }
 
 .home {
-  background-color: red; }
-  .home h2 {
-    color: #fff; }
+  background-color: #fff000;
+  color: #fff; }
 
-nav {
-  background-color: #fff000; }
-  nav ul {
-    list-style: none; }
-    nav ul li {
-      float: left;
-      margin-right: 20px; }
-      nav ul li a {
-        color: #fff; }
+.about {
+  background-color: blue;
+  color: #fff; }
+
+.contact {
+  background-color: red;
+  color: #fff; }
+
+.notfound {
+  background-color: purple;
+  color: #fff; }
 
 body {
-  background-color: blue; }
+  background-color: #00ff00; }
+
+.content {
+  opacity: 0;
+  border-radius: 5px; }
+
+.content-show {
+  opacity: 1;
+  -webkit-transition: all .5s;
+  transition: all .5s; }

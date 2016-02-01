@@ -10,25 +10,32 @@ gulp.task('lint', require('./tasks/eslint.js'));
 //scss lint task
 gulp.task('scsslint', require('./tasks/scss-lint.js'));
 
-//sass - scss task
-gulp.task('sass', require('./tasks/sass.js'));
-
-//minify JS task
+//uglify task
 gulp.task('uglify', require('./tasks/uglify.js'));
 
 //imagemmin task
 gulp.task('imagemin', require('./tasks/imagemin.js'));
 
-//minify html task
-gulp.task('htmlmin', require('./tasks/htmlmin.js'));
+//sass - scss task
+gulp.task('sass', require('./tasks/sass.js'));
 
 //watch js scss files
 gulp.task('watch', require('./tasks/watch.js'));
 
-//local server 
-gulp.task('browser-sync', require('./tasks/browserSync.js'));
+//html min js scss files
+gulp.task('html-min', require('./tasks/html-min.js'));
+
+//post css
+gulp.task('post-css', require('./tasks/post-css.js'));
+
+//local server
+gulp.task('browsersync', require('./tasks/browsersync.js'));
 
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scsslint',  'htmlmin', 'browserify', 'watch', 'browser-sync']);
+gulp.task('default', ['scsslint', 'sass', 'lint', 'browserify', 'browsersync', 'watch']);
 
-gulp.task('travis', ['browserify', 'lint', 'scsslint', 'sass', 'imagemin', 'uglify']);
+// Default Task
+gulp.task('deploy', ['scsslint', 'sass', 'lint', 'browserify', 'browsersync', 'watch', 'html-min']);
+
+//CI
+gulp.task('travis', ['scsslint', 'sass', 'browserify', 'lint', 'imagemin', 'html-min', 'uglify']);

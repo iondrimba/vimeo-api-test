@@ -1,0 +1,20 @@
+@import './partials/header';
+@import './partials/menu';
+@import './partials/footer';
+@import './views/home';
+@import './views/about';
+@import './views/contact';
+@import './views/notfound';
+body {
+    background-color: #00ff00;
+}
+
+.content {
+    opacity: 0;
+    border-radius: 5px;
+}
+
+.content-show {
+    opacity: 1;
+    transition: all .5s;
+}

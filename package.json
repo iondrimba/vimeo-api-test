@@ -1,10 +1,10 @@
 {
-  "name": "browserify_sample",
+  "name": "spa_template",
   "version": "0.0.1",
-  "description": "Browserify + Gulp Project Template",
+  "description": "Browserify + Gulp + Backbone SPA Project Template",
   "main": "gulpfile.js",
   "keywords": [
-    "CommonJs",
+    "SPA",
     "Browserify",
     "Gulp"
   ],
@@ -13,25 +13,29 @@
     "url": "git+https://github.com/iondrimba/Browserify-Gulp-Sample.git"
   },
   "author": "Ion D. Filho",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^6.3.1",
     "browser-sync": "^2.11.1",
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-htmlmin": "^1.3.0",
     "gulp-imagemin": "^2.4.0",
+    "gulp-postcss": "^6.0.1",
     "gulp-sass": "^2.0.4",
     "gulp-scss-lint": "^0.3.8",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
-    "gulp-webserver": "^0.9.1",
     "imagemin-pngquant": "^4.2.0",
-    "jquery": "^2.1.4",
-    "nojquery": "^1.0.42",
+    "stringify": "^3.2.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "handlebars": "^4.0.5",
+    "jquery": "^2.1.4",
+    "page": "^1.6.4"
+  }
 }
