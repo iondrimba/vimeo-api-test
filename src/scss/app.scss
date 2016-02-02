@@ -6,7 +6,9 @@
 @import './views/contact';
 @import './views/notfound';
 body {
-    background-color: #00ff00;
+    background-color: #ccc;
+    color: #000;
+    font-family: sans-serif;
 }
 
 .content {
@@ -17,4 +19,8 @@ body {
 .content-show {
     opacity: 1;
     transition: all .5s;
+}
+
+a {
+    color: inherit;
 }

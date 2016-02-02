@@ -8,6 +8,9 @@ var MenuModel = function MenuModel() {
     }, {
         label: 'About',
         href: '/about'
+    }, {
+        label: 'Not Found',
+        href: '/---'
     }, ];
 };
 
