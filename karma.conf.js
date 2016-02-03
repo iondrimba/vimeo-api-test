@@ -1,41 +1,34 @@
 // Karma configuration
 // Generated on Tue Feb 02 2016 21:20:59 GMT-0200 (Horário brasileiro de verão)
 var istanbul = require('browserify-istanbul');
+var underscore = require('underscore');
 module.exports = function(config) {
     config.set({
 
-            // base path that will be used to resolve all patterns (eg. files, exclude)
-            basePath: '',
+        // base path that will be used to resolve all patterns (eg. files, exclude)
+        basePath: '',
 
 
-            // frameworks to use
-            // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-            frameworks: ['browserify', 'jasmine'],
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: ['browserify', 'jasmine'],
+        // list of files / patterns to load in the browser
+        files: [
+            'src/scripts/app.js',
+            'spec/*.js'
+        ],
 
-
-            // list of files / patterns to load in the browser
-            files: [
-                'public/js/app.js',
-                'spec/*.js'
-            ],
-
-            browserify: {
-                debug: true,
-                plugin: ['stringify'],
-                transform: [istanbul({
-                    ignore: ['**/node_modules/**', '**/templates/**'],
-                })]
+        browserify: {
+            debug: true,
+            transform: ['stringify'],
+            extensions: ['.js'],
+            bundleDelay: 1000
         },
-
-        // list of files to exclude
-        exclude: [],
-
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/scripts/app.js': ['browserify'],
-            'spec/*.js': ['coverage']
+            'src/scripts/app.js': ['browserify', 'coverage']
         },
         coverageReporter: {
             // specify a common output directory 
