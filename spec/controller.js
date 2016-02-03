@@ -40,10 +40,11 @@ describe('src/scripts/core - Controller Tests', function() {
         expect(contentChildren).toEqual(1);
     });
 
-    it('should have called animateInComplete after navigate ', function() {
+    it('should have called animateInComplete after navigate ', function(done) {
         spyOn(app.controller, 'animateInComplete');
         app.controller.navigate('/contact');
         var timeout = setTimeout(function() {
+            done();
             expect(app.controller.animateInComplete).toHaveBeenCalled();
             clearTimeout(timeout);
         }, 1000);
