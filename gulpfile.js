@@ -32,11 +32,14 @@ gulp.task('post-css', require('./tasks/post-css.js'));
 //local server
 gulp.task('browser-sync', require('./tasks/browser-sync.js'));
 
+gulp.task('coveralls', require('./tasks/coveralls.js'));
+
 // Default Task
 gulp.task('default', ['scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 'watch']);
 
 // Default Task
 gulp.task('deploy', ['scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 'watch', 'html-min']);
-
 //CI
-gulp.task('travis', ['scsslint', 'sass', 'browserify', 'lint', 'imagemin', 'html-min', 'uglify']);
+gulp.task('travis', ['scsslint', 'sass', 'browserify', 'lint', 'imagemin', 'html-min', 'uglify', 'coveralls']);
+
+gulp.task('coveralls', ['scsslint', 'sass', 'browserify', 'lint', 'imagemin', 'html-min', 'uglify']);
