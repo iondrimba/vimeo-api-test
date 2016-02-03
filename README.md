@@ -13,6 +13,8 @@ $ npm install
 
 $ gulp
 ```
+[Live demo]
+
 __TODO:__
  * Write more tests
 
@@ -72,3 +74,4 @@ __Structure:__
 ````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
+[Live demo]:<http://iondrimba.github.io/SPATemplate/>
