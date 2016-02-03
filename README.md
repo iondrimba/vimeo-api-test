@@ -27,14 +27,13 @@ __Features:__
 > you have to host it on apache so it can reads the .htaccess file
 
 __Testing:__
- $ npm test
-
-> In order to test if Pushstate is working
-> you have to host it on apache so it can reads the .htaccess file
+ * $ npm test
 
 __Includes:__
   * BrowserSync
   * Browserify 
+  * Karma (test runner)
+  * Jasmine (test library)
   * Sass
   * ESLint
   * Scss Lint (Requires Ruby and [scss-lint])
