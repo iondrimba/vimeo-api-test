@@ -45,8 +45,8 @@ describe('src/scripts/core - Controller Tests', function() {
         app.controller.navigate('/contact');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
-            done();
             clearTimeout(timeout);
+            done();
         }, 1000);
     });
 
