@@ -31,14 +31,25 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/scripts/app.js': ['browserify']
+            'src/scripts/app.js': ['browserify'],
+            'src/scripts/app.js': ['coverage']
         },
-
+        coverageReporter: {
+            // specify a common output directory 
+            dir: 'test/reports/coverage',
+            reporters: [
+                // reporters not supporting the `file` property 
+                {
+                    type: 'lcov',
+                    subdir: 'report-lcov'
+                }                
+            ]
+        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['spec'],
+        reporters: ['spec', 'coverage'],
 
 
         // web server port
