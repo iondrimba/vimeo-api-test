@@ -32,6 +32,7 @@ gulp.task('post-css', require('./tasks/post-css.js'));
 //local server
 gulp.task('browser-sync', require('./tasks/browser-sync.js'));
 
+//coveralls
 gulp.task('coveralls', require('./tasks/coveralls.js'));
 
 // Default Task

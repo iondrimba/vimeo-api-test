@@ -1,27 +1,30 @@
 // Karma configuration
 // Generated on Tue Feb 02 2016 21:20:59 GMT-0200 (Horário brasileiro de verão)
-
+var istanbul = require('browserify-istanbul');
 module.exports = function(config) {
     config.set({
 
-        // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '',
+            // base path that will be used to resolve all patterns (eg. files, exclude)
+            basePath: '',
 
 
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['browserify', 'jasmine'],
+            // frameworks to use
+            // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+            frameworks: ['browserify', 'jasmine'],
 
 
-        // list of files / patterns to load in the browser
-        files: [
-            'public/js/app.js',
-            'spec/*.js'
-        ],
+            // list of files / patterns to load in the browser
+            files: [
+                'public/js/app.js',
+                'spec/*.js'
+            ],
 
-        browserify: {
-            debug: true,
-            plugin: ['stringify']
+            browserify: {
+                debug: true,
+                plugin: ['stringify'],
+                transform: [istanbul({
+                    ignore: ['**/node_modules/**', '**/templates/**'],
+                })]
         },
 
         // list of files to exclude
@@ -32,7 +35,7 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'src/scripts/app.js': ['browserify'],
-            'public/js/app.js': ['coverage']
+            'spec/*.js': ['coverage']
         },
         coverageReporter: {
             // specify a common output directory 
@@ -42,7 +45,7 @@ module.exports = function(config) {
                 {
                     type: 'lcov',
                     subdir: 'report-lcov'
-                }                
+                }
             ]
         },
 
