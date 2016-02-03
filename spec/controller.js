@@ -44,8 +44,8 @@ describe('src/scripts/core - Controller Tests', function() {
         spyOn(app.controller, 'animateInComplete');
         app.controller.navigate('/contact');
         var timeout = setTimeout(function() {
-            done();
             expect(app.controller.animateInComplete).toHaveBeenCalled();
+            done();
             clearTimeout(timeout);
         }, 1000);
     });
