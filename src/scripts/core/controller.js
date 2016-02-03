@@ -12,11 +12,9 @@ var Controller = function Controller(app) {
         app.router('/', this.prerender.bind(this), this.home.bind(this));
         app.router('/contact', this.prerender.bind(this), this.contact.bind(this));
         app.router('/about', this.prerender.bind(this), this.about.bind(this));
-        app.router('/about/:section', this.prerender.bind(this), this.about.bind(this));
         app.router('*', this.notFound.bind(this));
         app.router.exit('*', this.exit.bind(this));
         app.router();
-
     };
     this.masterPage = function(ctx, next) {
         this.master = new Master(app);
@@ -26,6 +24,9 @@ var Controller = function Controller(app) {
         this.content = app.$('.content');
     };
     this.navigate = function(path) {
+        if (path===undefined) {
+            throw new Error('invalid path::' + path);
+        }
         app.router(path);
     };
     this.empty = function() {
@@ -50,13 +51,13 @@ var Controller = function Controller(app) {
         this.add(this.current.view());
         this.current.render();
         this.masterPageUpdate();
-        setTimeout(function() {
+        var timeout = setTimeout(function() {
             this.current.animateIn(this.animateInComplete);
-            clearTimeout();
+            clearTimeout(timeout);
         }.bind(this), 10);
     };
     this.animateInComplete = function() {
-        console.log('controller in complete');
+        console.log('controller animateInComplete');
     };
     this.prerender = function(ctx, next) {
         next();
