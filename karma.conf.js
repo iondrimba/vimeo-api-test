@@ -26,7 +26,8 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/scripts/app.js': ['browserify', 'coverage']
+            'src/scripts/app.js': ['browserify'],
+            'spec/*.js': ['coverage']
         },
         coverageReporter: {
             // specify a common output directory 
