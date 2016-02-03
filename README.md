@@ -2,7 +2,7 @@
 Simple ready to go SPA template. No framework dependency.
 To be used for simple static websites with little interactions.
 
-[![Travis build status](https://travis-ci.org/iondrimba/SPATemplate.svg?branch=master)](https://travis-ci.org/iondrimba/SPATemplate)
+[![Travis build status](https://travis-ci.org/iondrimba/SPATemplate.svg?branch=master)](https://travis-ci.org/iondrimba/SPATemplate) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/SPATemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/SPATemplate?branch=master)
 
 ### Installation
 
