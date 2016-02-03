@@ -1,4 +1,4 @@
-describe('.find() Test', function() {
+describe('src/scripts/core - Controller Tests', function() {
 
     it('App should be defined ', function() {
         expect(app).toBeDefined();
