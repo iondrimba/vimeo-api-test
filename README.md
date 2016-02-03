@@ -13,10 +13,19 @@ $ npm install
 
 $ gulp
 ```
+__TODO:__
+ * Write more tests
+
 __Features:__
  * Router system with pushstate (page.js)
  * Templating engine with (handlebars.js)
  * Module system CommonJs (browserify)
+
+> In order to test if Pushstate is working
+> you have to host it on apache so it can reads the .htaccess file
+
+__Testing:__
+ $ npm test
 
 > In order to test if Pushstate is working
 > you have to host it on apache so it can reads the .htaccess file
