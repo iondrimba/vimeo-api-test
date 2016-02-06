@@ -20,7 +20,7 @@ __TODO:__
 
 __Features:__
  * Router system with pushstate (page.js)
- * Templating engine with (handlebars.js)
+ * Templating engine (handlebars.js)
  * Module system CommonJs (browserify)
 
 > In order to test if Pushstate is working
