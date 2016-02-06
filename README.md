@@ -72,7 +72,7 @@ __Structure:__
 │── gulpfile.js
 │── lint.yml
 │── package.json
-└── README.mdeslint
+└── README.md
 ````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
