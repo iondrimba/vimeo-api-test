@@ -13,6 +13,8 @@ $ npm install
 
 $ gulp
 ```
+[Live demo]
+
 __TODO:__
  * Write more tests
 
@@ -25,14 +27,13 @@ __Features:__
 > you have to host it on apache so it can reads the .htaccess file
 
 __Testing:__
- $ npm test
-
-> In order to test if Pushstate is working
-> you have to host it on apache so it can reads the .htaccess file
+ * $ npm test
 
 __Includes:__
   * BrowserSync
   * Browserify 
+  * Karma (test runner)
+  * Jasmine (test library)
   * Sass
   * ESLint
   * Scss Lint (Requires Ruby and [scss-lint])
@@ -75,3 +76,4 @@ __Structure:__
 ````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
+[Live demo]:<http://iondrimba.github.io/SPATemplate/>

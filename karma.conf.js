@@ -1,6 +1,5 @@
 // Karma configuration
 // Generated on Tue Feb 02 2016 21:20:59 GMT-0200 (Horário brasileiro de verão)
-
 module.exports = function(config) {
     config.set({
 
@@ -11,28 +10,24 @@ module.exports = function(config) {
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['browserify', 'jasmine'],
-
-
         // list of files / patterns to load in the browser
         files: [
-            'public/js/app.js',
+            'src/scripts/app.js',
             'spec/*.js'
         ],
 
         browserify: {
             debug: true,
-            plugin: ['stringify']
+            transform: ['stringify'],
+            extensions: ['.js'],
+            bundleDelay: 1000
         },
-
-        // list of files to exclude
-        exclude: [],
-
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'src/scripts/app.js': ['browserify'],
-            'public/js/app.js': ['coverage']
+            'spec/*.js': ['coverage']
         },
         coverageReporter: {
             // specify a common output directory 
@@ -42,7 +37,7 @@ module.exports = function(config) {
                 {
                     type: 'lcov',
                     subdir: 'report-lcov'
-                }                
+                }
             ]
         },
 

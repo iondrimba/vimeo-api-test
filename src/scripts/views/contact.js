@@ -15,9 +15,9 @@ var Contact = function Contact(app) {
     this.destroy = function() {};
     this.animateIn = function(complete) {
         app.controller.content.addClass('content-show');
-        setTimeout(function() {
+        var timeout = setTimeout(function() {
             complete();
-            clearTimeout();
+            clearTimeout(timeout);
         }, 500);
     };
 };
