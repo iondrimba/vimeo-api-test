@@ -57,14 +57,17 @@ __Structure:__
 │    ├─── images/
 │    ├─── .htaccess
 │    └─── index.html
+│── spec/(jasmine tests)
 │── src/
 │    ├── scripts/
 │    └── scss/
 │    └── templates/
 │── tasks/
+│── test/(coverage report)
 │
 │── .gitignore
 │── .travis.yml
+│── karma.conf.js
 │── gulpfile.js
 │── lint.yml
 │── package.json
