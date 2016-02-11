@@ -20,10 +20,10 @@ gulp.task('imagemin', require('./tasks/imagemin.js'));
 //sass - scss task
 gulp.task('sass', require('./tasks/sass.js'));
 
-//watch js scss files
+//watch js/scss/teplate files
 gulp.task('watch', require('./tasks/watch.js'));
 
-//html min js scss files
+//html min 
 gulp.task('html-min', require('./tasks/html-min.js'));
 
 //post css
