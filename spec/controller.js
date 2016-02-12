@@ -1,28 +1,38 @@
+var HomeModel = require('../src/scripts/models/home-model');
+var AboutModel = require('../src/scripts/models/about-model');
+var ContactModel = require('../src/scripts/models/contact-model');
+var NotFoundModel = require('../src/scripts/models/notfound-model');
+
+
 describe('src/scripts/core - Controller Tests', function() {
 
     it('App should be defined ', function() {
         expect(app).toBeDefined();
     });
 
-    it('should be page home ', function() {
+    it('should navigate to home page', function() {
         app.controller.navigate('/');
-        expect(app.controller.current.model.title).toEqual('Home');
+        var model = new HomeModel();
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
 
-    it('should be page about ', function() {
+    it('should navigate to about page', function() {
         app.controller.navigate('/about');
-        expect(app.controller.current.model.title).toEqual('About');
+        var model = new AboutModel();
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
 
-    it('should be page contact ', function() {
+    it('should navigate to contact page', function() {
         app.controller.navigate('/contact');
-        expect(app.controller.current.model.title).toEqual('Contact');
+        var model = new ContactModel();
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
-    it('should be page not found ', function() {
+    it('should navigate to not found page', function() {
         app.controller.navigate('/---');
-        expect(app.controller.current.model.title).toEqual('Oops!');
+        var model = new NotFoundModel();
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
-    it('should be throw exeption', function() {
+    it('should throw exeption', function() {
         expect(function() {
             app.controller.navigate();
         }).toThrow();

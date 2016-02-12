@@ -39,6 +39,7 @@
     "isarray": "^1.0.0",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
+    "jasmine-node": "^1.14.5",
     "karma": "^0.13.19",
     "karma-browserify": "^5.0.1",
     "karma-coverage": "^0.5.3",

@@ -15,7 +15,7 @@ module.exports = function(config) {
             'src/scripts/app.js',
             'spec/*.js'
         ],
-
+        included: false,
         browserify: {
             debug: true,
             transform: ['stringify'],
@@ -27,7 +27,7 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'src/scripts/app.js': ['browserify'],
-            'spec/*.js': ['coverage']
+            'spec/*.js': ['browserify', 'coverage']
         },
         coverageReporter: {
             // specify a common output directory 
@@ -40,7 +40,6 @@ module.exports = function(config) {
                 }
             ]
         },
-
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
