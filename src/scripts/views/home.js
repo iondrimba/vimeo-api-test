@@ -17,7 +17,7 @@ var Home = function Home(app) {
         button.on('click', this.click.bind(this));
     };
     this.click = function() {
-        console.log('home');
+        alert('home');
     };
     this.destroy = function() {
         button.off('click');
