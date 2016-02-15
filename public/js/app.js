@@ -19711,7 +19711,7 @@ var HeaderModel = function HeaderModel() {
 module.exports = HeaderModel;
 },{}],57:[function(require,module,exports){
 var HomeModel = function HomeModel() {
-    this.title = 'Home 1';
+    this.title = 'Home';
 };
 
 

@@ -9,5 +9,4 @@ module.exports = function() {
 
     gulp.watch("./public/css/app.css").on('change', browserSync.reload);
     gulp.watch("./public/js/app.js").on('change', browserSync.reload);
-    gulp.watch("./public/index.html").on('change', browserSync.reload);
 };

@@ -1,5 +1,5 @@
 var HomeModel = function HomeModel() {
-    this.title = 'Home 1';
+    this.title = 'Home';
 };
 
 
