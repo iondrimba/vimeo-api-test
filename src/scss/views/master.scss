@@ -1,0 +1,40 @@
+@import './components/button';
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #252323;
+    color: #fff;
+}
+
+button {
+    @include button();
+}
+
+button:hover {
+    @include button-hover();
+}
+
+button:active {
+    @include button-active();
+}
+
+button:focus {
+    @include button-focus();
+}
+
+a {
+    @include button();
+    margin-left: 5px;
+    margin-right: 5px;
+    color: inherit;
+}
+
+.content {
+    opacity: 0;
+    border-radius: 5px;
+}
+
+.content-show {
+    opacity: 1;
+    transition: all .5s;
+}

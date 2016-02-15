@@ -1,26 +1,10 @@
+@import '../../node_modules/normalize-scss/sass/_normalize.scss';
+@import './components/button';
 @import './partials/header';
 @import './partials/menu';
 @import './partials/footer';
+@import './views/master';
 @import './views/home';
 @import './views/about';
 @import './views/contact';
 @import './views/notfound';
-body {
-    background-color: #ccc;
-    color: #000;
-    font-family: sans-serif;
-}
-
-.content {
-    opacity: 0;
-    border-radius: 5px;
-}
-
-.content-show {
-    opacity: 1;
-    transition: all .5s;
-}
-
-a {
-    color: inherit;
-}
