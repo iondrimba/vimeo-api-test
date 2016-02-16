@@ -16,9 +16,9 @@ var About = function About(app) {
     this.destroy = function() {};
     this.animateIn = function(complete) {
         app.controller.content.addClass('content-show');
-        setTimeout(function() {
+        var timeout = setTimeout(function() {
+            clearTimeout(timeout);
             complete();
-            clearTimeout();
         }, 500);
     };
 };

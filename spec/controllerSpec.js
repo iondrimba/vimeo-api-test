@@ -49,6 +49,13 @@ describe('src/scripts/core - Controller Tests', function() {
         expect(contentChildren).toEqual(1);
     });
 
+    it('should have called click on Home', function() {
+        app.controller.navigate('/');
+        spyOn(app.controller.current, 'click');
+        app.controller.current.click();
+        expect(app.controller.current.click).toHaveBeenCalled();
+    });
+
     it('should have called animateInComplete after navigate to Contact ', function(done) {
         spyOn(app.controller, 'animateInComplete');
         app.controller.navigate('/contact');
@@ -68,6 +75,7 @@ describe('src/scripts/core - Controller Tests', function() {
             done();
         }, 1000);
     });
+
 
     it('should have called animateInComplete after navigate to About', function(done) {
         spyOn(app.controller, 'animateInComplete');
