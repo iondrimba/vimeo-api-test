@@ -1,3 +1,8 @@
+var HomeModel = require('../src/scripts/models/home-model');
+var AboutModel = require('../src/scripts/models/about-model');
+var ContactModel = require('../src/scripts/models/contact-model');
+var NotFoundModel = require('../src/scripts/models/notfound-model');
+
 describe('src/scripts/core - Controller Tests', function() {
 
     it('App should be defined ', function() {
@@ -5,33 +10,26 @@ describe('src/scripts/core - Controller Tests', function() {
     });
 
     it('should navigate to home page', function() {
-        app.controller.home();
-        var title = app.controller.current.model.title;
+        var model = new HomeModel();
         app.controller.navigate('/');
-        expect(app.controller.current.model.title).toEqual(title);
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
 
     it('should navigate to about page', function() {
-        app.controller.about();
-        var title = app.controller.current.model.title;
-
+        var model = new AboutModel();
         app.controller.navigate('/about');
-        expect(app.controller.current.model.title).toEqual(title);
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
 
     it('should navigate to contact page', function() {
-        app.controller.contact();
-        var title = app.controller.current.model.title;
-
+        var model = new ContactModel();
         app.controller.navigate('/contact');
-        expect(app.controller.current.model.title).toEqual(title);
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
     it('should navigate to not found page', function() {
-        app.controller.notFound();
-        var title = app.controller.current.model.title;
-
+        var model = new NotFoundModel();
         app.controller.navigate('/---');
-        expect(app.controller.current.model.title).toEqual(title);
+        expect(app.controller.current.model.title).toEqual(model.title);
     });
     it('should throw exeption', function() {
         expect(function() {
