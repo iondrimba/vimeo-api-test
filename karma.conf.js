@@ -17,7 +17,7 @@ module.exports = function(config) {
         ],
         included: false,
         browserify: {
-            debug: false,
+            debug: true ,
             transform: ['stringify'],
             extensions: ['.js'],
             bundleDelay: 1000
@@ -27,7 +27,6 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'src/scripts/app.js': ['browserify'],
-            'spec/modelsSpec.js': ['browserify', 'coverage'],
             'spec/controllerSpec.js': ['coverage']
         },
         coverageReporter: {
