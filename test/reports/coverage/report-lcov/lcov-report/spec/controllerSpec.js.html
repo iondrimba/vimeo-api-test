@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>43/43</span>
+        <span class='fraction'>64/64</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>43/43</span>
+        <span class='fraction'>64/64</span>
       </div>
     </div>
   </div>
@@ -104,7 +104,37 @@
 59
 60
 61
-62</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -153,6 +183,36 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -216,9 +276,39 @@ describe('src/scripts/core - Controller Tests', function() {
         expect(contentChildren).toEqual(1);
     });
 &nbsp;
-    it('should have called animateInComplete after navigate ', function(done) {
+    it('should have called animateInComplete after navigate to Contact ', function(done) {
         spyOn(app.controller, 'animateInComplete');
         app.controller.navigate('/contact');
+        var timeout = setTimeout(function() {
+            expect(app.controller.animateInComplete).toHaveBeenCalled();
+            clearTimeout(timeout);
+            done();
+        }, 1000);
+    });
+&nbsp;
+    it('should have called animateInComplete after navigate to Home', function(done) {
+        spyOn(app.controller, 'animateInComplete');
+        app.controller.navigate('/home');
+        var timeout = setTimeout(function() {
+            expect(app.controller.animateInComplete).toHaveBeenCalled();
+            clearTimeout(timeout);
+            done();
+        }, 1000);
+    });
+&nbsp;
+    it('should have called animateInComplete after navigate to About', function(done) {
+        spyOn(app.controller, 'animateInComplete');
+        app.controller.navigate('/about');
+        var timeout = setTimeout(function() {
+            expect(app.controller.animateInComplete).toHaveBeenCalled();
+            clearTimeout(timeout);
+            done();
+        }, 1000);
+    });
+&nbsp;
+    it('should have called animateInComplete after navigate to NotFound', function(done) {
+        spyOn(app.controller, 'animateInComplete');
+        app.controller.navigate('/---');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
             clearTimeout(timeout);
@@ -232,7 +322,7 @@ describe('src/scripts/core - Controller Tests', function() {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 16 2016 13:59:22 GMT-0200 (BRST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 16 2016 15:13:52 GMT-0200 (BRST)
 </div>
 </div>
 <script src="../prettify.js"></script>
