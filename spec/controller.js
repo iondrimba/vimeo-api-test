@@ -1,7 +1,7 @@
-var HomeModel = require('../src/scripts/models/home-model');
-var AboutModel = require('../src/scripts/models/about-model');
-var ContactModel = require('../src/scripts/models/contact-model');
-var NotFoundModel = require('../src/scripts/models/notfound-model');
+// var HomeModel = require('../src/scripts/models/home-model');
+// var AboutModel = require('../src/scripts/models/about-model');
+// var ContactModel = require('../src/scripts/models/contact-model');
+// var NotFoundModel = require('../src/scripts/models/notfound-model');
 
 
 describe('src/scripts/core - Controller Tests', function() {
@@ -11,26 +11,33 @@ describe('src/scripts/core - Controller Tests', function() {
     });
 
     it('should navigate to home page', function() {
+        app.controller.home();
+        var title = app.controller.current.model.title;
         app.controller.navigate('/');
-        var model = new HomeModel();
-        expect(app.controller.current.model.title).toEqual(model.title);
+        expect(app.controller.current.model.title).toEqual(title);
     });
 
     it('should navigate to about page', function() {
+        app.controller.about();
+        var title = app.controller.current.model.title;
+
         app.controller.navigate('/about');
-        var model = new AboutModel();
-        expect(app.controller.current.model.title).toEqual(model.title);
+        expect(app.controller.current.model.title).toEqual(title);
     });
 
     it('should navigate to contact page', function() {
+        app.controller.contact();
+        var title = app.controller.current.model.title;
+
         app.controller.navigate('/contact');
-        var model = new ContactModel();
-        expect(app.controller.current.model.title).toEqual(model.title);
+        expect(app.controller.current.model.title).toEqual(title);
     });
     it('should navigate to not found page', function() {
+        app.controller.notFound();
+        var title = app.controller.current.model.title;
+
         app.controller.navigate('/---');
-        var model = new NotFoundModel();
-        expect(app.controller.current.model.title).toEqual(model.title);
+        expect(app.controller.current.model.title).toEqual(title);
     });
     it('should throw exeption', function() {
         expect(function() {
