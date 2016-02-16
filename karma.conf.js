@@ -1,5 +1,7 @@
 // Karma configuration
 // Generated on Tue Feb 02 2016 21:20:59 GMT-0200 (Horário brasileiro de verão)
+var istanbul = require('browserify-istanbul');
+
 module.exports = function(config) {
     config.set({
 
@@ -17,8 +19,10 @@ module.exports = function(config) {
         ],
         included: false,
         browserify: {
-            debug: true ,
-            transform: ['stringify'],
+            debug: true,
+            transform: ['stringify', istanbul({
+                defaultIgnore: true
+            })],
             extensions: ['.js'],
             bundleDelay: 1000
         },
@@ -27,7 +31,7 @@ module.exports = function(config) {
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'src/scripts/app.js': ['browserify'],
-            'spec/controllerSpec.js': ['coverage']
+            'spec/*.js': ['browserify']
         },
         coverageReporter: {
             // specify a common output directory 
