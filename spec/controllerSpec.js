@@ -61,7 +61,7 @@ describe('src/scripts/core - Controller Tests', function() {
 
     it('should have called animateInComplete after navigate to Home', function(done) {
         spyOn(app.controller, 'animateInComplete');
-        app.controller.navigate('/home');
+        app.controller.navigate('/');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
             clearTimeout(timeout);
