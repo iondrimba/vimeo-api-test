@@ -8231,7 +8231,7 @@ function amdefine(module, requireFn) {
 
 module.exports = amdefine;
 
-}).call(this,require('_process'),"/node_modules\\handlebars\\node_modules\\source-map\\node_modules\\amdefine\\amdefine.js")
+}).call(this,require('_process'),"/node_modules/handlebars/node_modules/source-map/node_modules/amdefine/amdefine.js")
 },{"_process":3,"path":2}],46:[function(require,module,exports){
 var toString = {}.toString;
 
@@ -19948,27 +19948,27 @@ var NotFound = function NotFound(app) {
 
 module.exports = NotFound;
 },{"../../../src/templates/notfound.html":75,"../models/notfound-model":59}],68:[function(require,module,exports){
-module.exports = "<!--ABOUT-->\r\n<div class=\"about\">\r\n    <h1>{{title}}</h1>\r\n</div>";
+module.exports = "<!--ABOUT-->\n<div class=\"about\">\n    <h1>{{title}}</h1>\n</div>";
 
 },{}],69:[function(require,module,exports){
-module.exports = "<!--CONTACT-->\r\n<div class=\"contact\">\r\n    <h1>{{title}}</h1>\r\n</div>";
+module.exports = "<!--CONTACT-->\n<div class=\"contact\">\n    <h1>{{title}}</h1>\n</div>";
 
 },{}],70:[function(require,module,exports){
-module.exports = "<!--FOOTER-->\r\n<div class=\"footer\">\r\n    <h1>{{title}}</h1>\r\n</div>";
+module.exports = "<!--FOOTER-->\n<div class=\"footer\">\n    <h1>{{title}}</h1>\n</div>";
 
 },{}],71:[function(require,module,exports){
-module.exports = "<!--HEADER-->\r\n<div class=\"header\">\r\n    <h1>{{title}}</h1>\r\n</div>";
+module.exports = "<!--HEADER-->\n<div class=\"header\">\n    <h1>{{title}}</h1>\n</div>";
 
 },{}],72:[function(require,module,exports){
-module.exports = "<!--HOME-->\r\n<div class=\"home\">\r\n    <h1>{{title}}</h1>\r\n    <button type=\"button\">click</button>\r\n</div>";
+module.exports = "<!--HOME-->\n<div class=\"home\">\n    <h1>{{title}}</h1>\n    <button type=\"button\">click</button>\n</div>";
 
 },{}],73:[function(require,module,exports){
-module.exports = "<h1>Browserify Sample</h1> \r\n{{{headerView}}}\r\n<hr>\r\n{{{menuView}}}\r\n<hr>\r\n<div class=\"content\">\r\n    <!--CONTENT ADDED VIA TEMPLATE-->\r\n</div>\r\n<hr>\r\n{{{footerView}}}";
+module.exports = "<h1>Browserify Sample</h1> \n{{{headerView}}}\n<hr>\n{{{menuView}}}\n<hr>\n<div class=\"content\">\n    <!--CONTENT ADDED VIA TEMPLATE-->\n</div>\n<hr>\n{{{footerView}}}";
 
 },{}],74:[function(require,module,exports){
-module.exports = "<!--MENU-->\r\n<div class=\"menu\">\r\n    {{#each links}}\r\n    <a href=\"{{href}}\">{{label}}</a> \r\n    {{/each}}\r\n</div>";
+module.exports = "<!--MENU-->\n<div class=\"menu\">\n    {{#each links}}\n    <a href=\"{{href}}\">{{label}}</a> \n    {{/each}}\n</div>";
 
 },{}],75:[function(require,module,exports){
-module.exports = "<!--HOME-->\r\n<div class=\"notfound\">\r\n    <h1>{{title}}</h1>\r\n    <a href=\"{{returnUrl}}\">return to HOME</a>\r\n</div>";
+module.exports = "<!--HOME-->\n<div class=\"notfound\">\n    <h1>{{title}}</h1>\n    <a href=\"{{returnUrl}}\">return to HOME</a>\n</div>";
 
 },{}]},{},[51]);
