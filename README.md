@@ -1,6 +1,5 @@
 # SPA Template 
-Simple ready to go SPA template. No framework dependency.
-To be used for simple static websites with little interactions.
+Simple ready to go SPA template. No MV* framework dependency.
 
 [![Travis build status](https://travis-ci.org/iondrimba/SPATemplate.svg?branch=master)](https://travis-ci.org/iondrimba/SPATemplate) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/SPATemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/SPATemplate?branch=master)
 
@@ -19,6 +18,8 @@ __TODO:__
  * Write more tests
 
 __Features:__
+ * Tests (Jasmine + Karma)
+ * Coverage (Coveralls)
  * Router system with pushstate (page.js)
  * Templating engine (handlebars.js)
  * Module system CommonJs (browserify)
@@ -53,8 +54,8 @@ __Structure:__
 
 ````bash
 ├── public/
-│    ├─── js/  (.gitignored)
-│    ├─── css/  (.gitignored)
+│    ├─── js/ 
+│    ├─── css/ 
 │    ├─── images/
 │    ├─── .htaccess
 │    └─── index.html
@@ -64,12 +65,11 @@ __Structure:__
 │    └── scss/
 │    └── templates/
 │── tasks/
-│── test/(coverage report)
 │
 │── .gitignore
 │── .travis.yml
-│── karma.conf.js
 │── gulpfile.js
+│── karma.conf.js
 │── lint.yml
 │── package.json
 └── README.md
