@@ -1,13 +1,13 @@
 # SPA Template 
 Simple ready to go SPA template. No MV* framework dependency.
 
-[![Travis build status](https://travis-ci.org/iondrimba/SPATemplate.svg?branch=master)](https://travis-ci.org/iondrimba/SPATemplate) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/SPATemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/SPATemplate?branch=master)
+[![Travis build status](https://travis-ci.org/iondrimba/spatemplate.svg?branch=master)](https://travis-ci.org/iondrimba/spatemplate) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/spatemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/spatemplate?branch=master)
 
 ### Installation
 
 ```sh
-$ git clone https://github.com/iondrimba/SPATemplate.git
-$ cd SPATemplate
+$ git clone https://github.com/iondrimba/spatemplate.git
+$ cd spatemplate
 $ npm install
 
 $ gulp
@@ -76,4 +76,4 @@ __Structure:__
 ````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
-[Live demo]:<http://iondrimba.github.io/SPATemplate/>
+[Live demo]:<http://iondrimba.github.io/spatemplate/>
