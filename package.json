@@ -5,6 +5,10 @@
   "main": "gulpfile.js",
   "keywords": [
     "SPA",
+    "Tests",
+    "Coverage",
+    "Jasmine",
+    "Karma",
     "Browserify",
     "Gulp"
   ],
