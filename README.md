@@ -12,12 +12,14 @@ $ npm install
 
 $ gulp
 ```
-[Live demo]
+### [Live demo]
 
 __TODO:__
+
  * Write more tests
 
 __Features:__
+
  * Tests (Jasmine + Karma)
  * Coverage (Coveralls)
  * Router system with pushstate (page.js)
