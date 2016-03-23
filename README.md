@@ -21,7 +21,7 @@ __TODO:__
 __Features:__
 
  * Tests (Jasmine + Karma)
- * SemVer (Automated versioning file names Semantic Versioning)
+ * SemVer (Automated versioning file names with Semantic Versioning)
  * Coverage (Coveralls)
  * Router system with pushstate (page.js)
  * Templating engine (handlebars.js)
@@ -31,7 +31,7 @@ __Features:__
 > you have to host it on apache so it can reads the .htaccess file
 
 __Testing:__
- * $ npm test
+ * npm test
 
 __Includes:__
   * BrowserSync
@@ -52,7 +52,7 @@ __Gulp Tasks:__
 
  * gulp (default)
  * gulp deploy
- * gulp travis 
+ * gulp travis
  * gulp bump-patch (update files with version number)
  * gulp bump-minor (update files with version number)
  * gulp bump-major (update files with version number)
