@@ -1,6 +1,6 @@
 {
   "name": "spa_template",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
   "keywords": [
@@ -28,6 +28,7 @@
     "browserify-istanbul": "^0.2.1",
     "es6-promise": "^3.0.2",
     "gulp": "^3.9.0",
+    "gulp-bump": "^2.0.1",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^1.0.0",
     "gulp-htmlmin": "^1.3.0",
@@ -50,6 +51,7 @@
     "karma-spec-reporter": "0.0.24",
     "karma-threshold-reporter": "^0.1.15",
     "phantomjs-prebuilt": "^2.1.4",
+    "semver": "^5.1.0",
     "stringify": "^3.2.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
