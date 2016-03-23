@@ -4,11 +4,11 @@ var handlebars = require('handlebars');
 var Controller = require('./core/controller');
 
 function App() {
-    this.$ = $;
-    this.router = Router;
-    this.handlebars = handlebars;
-    this.controller = new Controller(this);
-    this.controller.start();
+	this.$ = $;
+	this.router = Router;
+	this.handlebars = handlebars;
+	this.controller = new Controller(this);
+	this.controller.start();
 };
 
 window.app = new App();

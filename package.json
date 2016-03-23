@@ -1,6 +1,6 @@
 {
   "name": "spa_template",
-  "version": "0.8.2",
+  "version": "0.8.54",
   "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
   "keywords": [
@@ -8,6 +8,7 @@
     "Tests",
     "Coverage",
     "Jasmine",
+    "SemVer",
     "Karma",
     "Browserify",
     "Gulp"
@@ -27,7 +28,7 @@
     "browserify": "^13.0.0",
     "browserify-istanbul": "^0.2.1",
     "es6-promise": "^3.0.2",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-bump": "^2.0.1",
     "gulp-coveralls": "^0.1.4",
     "gulp-eslint": "^1.0.0",

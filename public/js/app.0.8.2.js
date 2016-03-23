@@ -1,1 +1,0 @@
-function App(){this.$=$,this.router=Router,this.handlebars=handlebars,this.controller=new Controller(this),this.controller.start()}var Router=require("../../node_modules/page/page"),$=require("../../node_modules/jquery/dist/jquery"),handlebars=require("handlebars"),Controller=require("./core/controller");window.app=new App;

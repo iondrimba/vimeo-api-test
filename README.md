@@ -21,6 +21,7 @@ __TODO:__
 __Features:__
 
  * Tests (Jasmine + Karma)
+ * SemVer (Automated versioning file names Semantic Versioning)
  * Coverage (Coveralls)
  * Router system with pushstate (page.js)
  * Templating engine (handlebars.js)
@@ -38,6 +39,7 @@ __Includes:__
   * Karma (test runner)
   * Jasmine (test library)
   * Sass
+  * SemVer
   * ESLint
   * Scss Lint (Requires Ruby and [scss-lint])
   * Imagemin (images optimization)
@@ -50,7 +52,16 @@ __Gulp Tasks:__
 
  * gulp (default)
  * gulp deploy
- * gulp travis
+ * gulp travis 
+ * gulp bump-patch (update files with version number)
+ * gulp bump-minor (update files with version number)
+ * gulp bump-major (update files with version number)
+
+ __Semantic Versioning:__
+
+ The bump-versions tasks should be executed after your deploy task
+ The task will rename the file app.js to app.version.js, the same will be done to the app.css.
+ After that the index.html is updated with the new file references.
 
 __Structure:__
 

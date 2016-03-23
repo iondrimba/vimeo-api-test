@@ -5,7 +5,7 @@ var stringify = require('stringify');
 var browserify = require('browserify');
 
 
-module.exports = function() {
+module.exports = function () {
     stringify.registerWithRequire({
         extensions: ['.txt', '.html'],
         minify: true,
@@ -20,9 +20,9 @@ module.exports = function() {
 
     var bundleStream = browserify('./src/scripts/app.js')
         .transform(stringify(['.html']))
-        .bundle();
+        .bundle()
 
-    bundleStream
-        .pipe(source('app.js'))
-        .pipe(gulp.dest('./public/js'))
+    //bundleStream
+    .pipe(source('app.js'))
+        .pipe(gulp.dest('./public/js'));
 };
