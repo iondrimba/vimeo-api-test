@@ -1,5 +1,5 @@
 {
-  "name": "spa_template",
+  "name": "spatemplate",
   "version": "0.8.57",
   "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iondrimba/SPATemplate.git"
+    "url": "git+https://github.com/iondrimba/spatemplate.git"
   },
   "scripts": {
     "test": "karma start"
