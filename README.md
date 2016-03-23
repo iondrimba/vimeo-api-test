@@ -53,9 +53,7 @@ __Gulp Tasks:__
  * gulp (default)
  * gulp deploy
  * gulp travis
- * gulp bump-patch (update files with version number)
- * gulp bump-minor (update files with version number)
- * gulp bump-major (update files with version number)
+ * gulp bump-patch / minor / major (update files with version number)
 
  __Semantic Versioning:__
 
