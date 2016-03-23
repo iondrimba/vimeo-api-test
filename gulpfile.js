@@ -14,16 +14,16 @@ var major = semver.inc(pckg.version, 'major');
 
 // bump versions on package
 gulp.task('minor', function () {
-    return bumpTemp(minor);
+    return bumpPackageJson(minor);
 });
 gulp.task('patch', function () {
-    return bumpTemp(patch);
+    return bumpPackageJson(patch);
 });
 gulp.task('major', function () {
-    return bumpTemp(major);
+    return bumpPackageJson(major);
 });
 
-function bumpTemp(type) {
+function bumpPackageJson(type) {
     return gulp.src(['./package.json'])
         .pipe(bump({
             version: type
