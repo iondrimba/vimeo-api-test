@@ -16,50 +16,52 @@ $ gulp
 
 __TODO:__
 
- * Write more tests
+* Write more tests
 
 __Features:__
 
- * Tests (Jasmine + Karma)
- * SemVer (Automated versioning file names with Semantic Versioning)
- * Coverage (Coveralls)
- * Router system with pushstate (page.js)
- * Templating engine (handlebars.js)
- * Module system CommonJs (browserify)
+* Tests (Jasmine + Karma)
+* SemVer (Automated versioning file names with Semantic Versioning)
+* Coverage (Coveralls)
+* Router system with pushstate (page.js)
+* Templating engine (handlebars.js)
+* Module system CommonJs (browserify)
 
 > In order to test if Pushstate is working
 > you have to host it on apache so it can reads the .htaccess file
 
 __Testing:__
+
  * npm test
 
 __Includes:__
-  * BrowserSync
-  * Browserify 
-  * Karma (test runner)
-  * Jasmine (test library)
-  * Sass
-  * SemVer
-  * ESLint
-  * Scss Lint (Requires Ruby and [scss-lint])
-  * Imagemin (images optimization)
-  * Uglify
-  * Watch
-  * Html-Min
-  * Post-Css (autoprefixer)
+
+* BrowserSync
+* Browserify 
+* Karma (test runner)
+* Jasmine (test library)
+* Sass
+* SemVer
+* ESLint
+* Scss Lint (Requires Ruby and [scss-lint])
+* Imagemin (images optimization)
+* Uglify
+* Watch
+* Html-Min
+* Post-Css (autoprefixer)
 
 __Gulp Tasks:__
 
- * gulp (default)
- * gulp deploy
- * gulp travis
- * gulp bump-patch / minor / major (update files with version number)
+* gulp (default)
+* gulp deploy
+* gulp travis
+* gulp bump-patch / minor / major (update files with version number)
 
- __Semantic Versioning:__
+__Semantic Versioning:__
 
- The bump-versions tasks should be executed after your deploy task
- The task will rename the file app.js to app.version.js, the same will be done to the app.css.
- After that the index.html is updated with the new file references.
+The bump-versions tasks should be executed after your deploy task
+The task will rename the file app.js to app.version.js, the same will be done to the app.css.
+After that the index.html is updated with the new file references.
 
 __Structure:__
 
