@@ -3,7 +3,9 @@ var Promise = require('es6-promise').Promise;
 var gulp = require('gulp');
 var bump = require('gulp-bump');
 var semver = require('semver');
+var renameMe = require('rename-me');
 var pckg = require('./package.json');
+var gulpsync = require('gulp-sync')(gulp);
 
 
 var patch = semver.inc(pckg.version, 'patch');
@@ -11,30 +13,33 @@ var minor = semver.inc(pckg.version, 'minor');
 var major = semver.inc(pckg.version, 'major');
 
 // bump versions on package
-gulp.task('minor', function () {
-
-  return gulp.src(['./package.json'])
-    .pipe(bump({
-      version: minor
-    }))
-    .pipe(gulp.dest('./'));
+gulp.task('minor', function() {
+    return bumpTemp(minor);
 });
-gulp.task('patch', function () {
-
-  return gulp.src(['./package.json'])
-    .pipe(bump({
-      version: patch
-    }))
-    .pipe(gulp.dest('./'));
+gulp.task('patch', function() {
+    return bumpTemp(patch);
 });
-gulp.task('major', function () {
-
-  return gulp.src(['./package.json'])
-    .pipe(bump({
-      version: major
-    }))
-    .pipe(gulp.dest('./'));
+gulp.task('major', function() {
+    return bumpTemp(major);
 });
+
+function bumpTemp(type) {
+    return gulp.src(['./package.json'])
+        .pipe(bump({
+            version: type
+        }))
+        .pipe(gulp.dest('./'));
+}
+
+function bumpAppFiles(version) {
+    var options = {};
+    options.version = version;
+    options.indexFile = './public/index.html';
+
+    options.filePath = ['./public/js/app.js', './public/css/app.css'];
+    options.outputfolder = ['./public/js/', './public/css/'];
+    renameMe(options);
+}
 
 // using vinyl-source-stream: 
 gulp.task('browserify', require('./tasks/browserify.js'));
@@ -75,9 +80,19 @@ gulp.task('default', ['scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 
 gulp.task('deploy', ['scsslint', 'sass', 'lint', 'browserify', 'html-min', 'uglify', 'imagemin']);
 
 // bump package versions
-gulp.task('bump-patch', ['deploy', 'patch']);
-gulp.task('bump-minor', ['deploy', 'minor']);
-gulp.task('bump-major', ['deploy', 'major']);
+gulp.task('bump-patch', gulpsync.sync(['deploy', 'patch']), function renamePatch() {
+    bumpAppFiles(patch);
+});
+
+gulp.task('bump-minor', gulpsync.sync(['deploy', 'minor']), function renameMinor() {
+    bumpAppFiles(minor);
+});
+
+gulp.task('bump-major', gulpsync.sync(['deploy', 'major']), function renameMajor() {
+    bumpAppFiles(major);
+});
+
+
 
 
 //CI
