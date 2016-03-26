@@ -1,6 +1,6 @@
 {
   "name": "spatemplate",
-  "version": "0.8.57",
+  "version": "0.8.60",
   "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
   "keywords": [
@@ -53,7 +53,7 @@
     "karma-spec-reporter": "0.0.24",
     "karma-threshold-reporter": "^0.1.15",
     "phantomjs-prebuilt": "^2.1.4",
-    "rename-me": "0.0.11",
+    "rename-me": "^1.1.0",
     "semver": "^5.1.0",
     "stringify": "^3.2.0",
     "vinyl-source-stream": "^1.1.0",
