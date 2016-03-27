@@ -20,7 +20,7 @@
   "scripts": {
     "test": "karma start"
   },
-  "author": "Ion D. Filho",
+  "author": "Ion D. Filho <iondrimba@gmail.com> (https://iondrimbafilho.me/)",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.1",
