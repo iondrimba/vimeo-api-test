@@ -1,7 +1,7 @@
 # SPA Template 
 Simple ready to go SPA template. No MV* framework dependency.
 
-[![Travis build status](https://travis-ci.org/iondrimba/spatemplate.svg?branch=master)](https://travis-ci.org/iondrimba/spatemplate) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva/branch/master?svg=true)](https://ci.appveyor.com/project/iondrimba/spatemplate/branch/master) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/spatemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/spatemplate?branch=master)
+[![Travis build status](https://travis-ci.org/iondrimba/spatemplate.svg?branch=master)](https://travis-ci.org/iondrimba/spatemplate) [![Build status](https://ci.appveyor.com/api/projects/status/5sga0634skwy1hd4?svg=true)](https://ci.appveyor.com/project/iondrimba/spatemplate) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/spatemplate/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/spatemplate?branch=master)
 
 ### Installation
 
