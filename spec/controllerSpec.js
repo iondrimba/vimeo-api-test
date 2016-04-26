@@ -15,6 +15,13 @@ describe('src/scripts/core - Controller Tests', function() {
         expect(app.controller.current.model.title).toEqual(model.title);
     });
 
+    it('should have executed click evento on home page', function() {
+        var model = new HomeModel();
+        app.controller.navigate('/');
+        var clicked = app.controller.current.click();
+        expect(clicked).toBe(true);
+    });
+
     it('should navigate to about page', function() {
         var model = new AboutModel();
         app.controller.navigate('/about');
@@ -49,15 +56,8 @@ describe('src/scripts/core - Controller Tests', function() {
         expect(contentChildren).toEqual(1);
     });
 
-    it('should have called click on Home', function() {
-        app.controller.navigate('/');
-        spyOn(app.controller.current, 'click');
-        app.controller.current.click();
-        expect(app.controller.current.click).toHaveBeenCalled();
-    });
-
     it('should have called animateInComplete after navigate to Contact ', function(done) {
-        spyOn(app.controller, 'animateInComplete');
+        spyOn(app.controller, 'animateInComplete').and.callThrough();
         app.controller.navigate('/contact');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('src/scripts/core - Controller Tests', function() {
     });
 
     it('should have called animateInComplete after navigate to Home', function(done) {
-        spyOn(app.controller, 'animateInComplete');
+        spyOn(app.controller, 'animateInComplete').and.callThrough();
         app.controller.navigate('/');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
@@ -78,7 +78,7 @@ describe('src/scripts/core - Controller Tests', function() {
 
 
     it('should have called animateInComplete after navigate to About', function(done) {
-        spyOn(app.controller, 'animateInComplete');
+        spyOn(app.controller, 'animateInComplete').and.callThrough();
         app.controller.navigate('/about');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();
@@ -88,7 +88,7 @@ describe('src/scripts/core - Controller Tests', function() {
     });
 
     it('should have called animateInComplete after navigate to NotFound', function(done) {
-        spyOn(app.controller, 'animateInComplete');
+        spyOn(app.controller, 'animateInComplete').and.callThrough();
         app.controller.navigate('/---');
         var timeout = setTimeout(function() {
             expect(app.controller.animateInComplete).toHaveBeenCalled();

@@ -18,6 +18,7 @@ var Home = function Home(app) {
     };
     this.click = function() {
         alert('home');
+        return true;
     };
     this.destroy = function() {
         button.off('click');
@@ -27,7 +28,7 @@ var Home = function Home(app) {
         app.controller.content.addClass('content-show');
         var timeout = setTimeout(function() {
             clearTimeout(timeout);
-            complete();
+            return complete();
         }, 500);
     };
 };

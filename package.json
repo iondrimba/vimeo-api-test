@@ -1,6 +1,6 @@
 {
   "name": "spatemplate",
-  "version": "0.8.60",
+  "version": "0.8.61",
   "description": "Simple ready to go SPA template. No framework dependency. To be used for simple static websites with little interactions.",
   "main": "gulpfile.js",
   "keywords": [

@@ -35,10 +35,10 @@ module.exports = function(config) {
             'spec/*.js': ['browserify']
         },
         coverageReporter: {
-            // specify a common output directory 
+            // specify a common output directory
             dir: 'test/reports/coverage',
             reporters: [
-                // reporters not supporting the `file` property 
+                // reporters not supporting the `file` property
                 {
                     type: 'lcov',
                     subdir: 'report-lcov'
@@ -49,7 +49,7 @@ module.exports = function(config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['spec', 'coverage'],
+        reporters: ['spec', 'coverage', 'threshold'],
 
         thresholdReporter: {
             statements: 90,

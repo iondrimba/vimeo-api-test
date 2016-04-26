@@ -57,7 +57,7 @@ var Controller = function Controller(app) {
         }.bind(this), 10);
     };
     this.animateInComplete = function() {
-        console.log('controller animateInComplete');
+        return true;
     };
     this.prerender = function(ctx, next) {
         next();
