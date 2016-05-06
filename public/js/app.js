@@ -19833,8 +19833,21 @@ var Home = function Home(app) {
         function onPlayProgress(data) {
             var seconds = parseInt(data.seconds.toString().replace(/\D/,''),10);
             console.log(seconds);
-            if(seconds>3000) {
-                app.$('.cn-video-nome').addClass('cn-video-nome-show');
+            if(seconds>2000) {
+                app.$('.cn-video-nome').addClass('show');
+            }
+
+            if(seconds>4000){
+             app.$('.cn-video-nome').addClass('hide');
+            }
+
+            if(seconds>6000) {
+                app.$('.cn-video-nome').text('Voltei!');
+                app.$('.cn-video-nome').removeClass('hide').addClass('show');
+            }
+            if(seconds>8000) {
+                app.$('.cn-video-nome').text('Voltei!');
+                app.$('.cn-video-nome').addClass('hide');
             }
         }
     };

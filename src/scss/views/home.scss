@@ -8,9 +8,7 @@
     	min-height: 320px;
     	position: relative;
     	margin: 0 auto;
-    	margin-top:50%;
     	display: block;
-    	transform: translate(0,-50%);
 	}
 
 	iframe {
@@ -31,7 +29,10 @@
   		transform: translate(-50%, -50%);
 	}
 
-	.cn-video-nome-show {
+	.show {
 		opacity: 1;
+	}
+	.hide {
+		opacity: 0;
 	}
 }
