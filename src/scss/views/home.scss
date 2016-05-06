@@ -1,2 +1,37 @@
 .home {
+
+	.cn-video-ph {
+		max-width: 800px;
+    	width: 100%;
+    	min-width: 320px;
+    	background-color: red;
+    	min-height: 320px;
+    	position: relative;
+    	margin: 0 auto;
+    	margin-top:50%;
+    	display: block;
+    	transform: translate(0,-50%);
+	}
+
+	iframe {
+    	min-height: 320px;
+	}
+
+	.cn-video-nome {
+		position: absolute;
+		background-color: green;
+		text-align: center;
+		max-width: 570px;
+		width: 100%;
+		margin: 0 auto;
+		display: block;
+		opacity: 0;
+		left: 50%;
+  		top: 50%;
+  		transform: translate(-50%, -50%);
+	}
+
+	.cn-video-nome-show {
+		opacity: 1;
+	}
 }

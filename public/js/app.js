@@ -8241,7 +8241,7 @@ module.exports = Array.isArray || function (arr) {
 
 },{}],47:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.0
+ * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -8251,7 +8251,7 @@ module.exports = Array.isArray || function (arr) {
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-01-08T20:02Z
+ * Date: 2016-04-05T19:26Z
  */
 
 (function( global, factory ) {
@@ -8307,7 +8307,7 @@ var support = {};
 
 
 var
-	version = "2.2.0",
+	version = "2.2.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -8518,6 +8518,7 @@ jQuery.extend( {
 	},
 
 	isPlainObject: function( obj ) {
+		var key;
 
 		// Not plain objects:
 		// - Any object or value whose internal [[Class]] property is not "[object Object]"
@@ -8527,14 +8528,18 @@ jQuery.extend( {
 			return false;
 		}
 
+		// Not own constructor property must be Object
 		if ( obj.constructor &&
-				!hasOwn.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
+				!hasOwn.call( obj, "constructor" ) &&
+				!hasOwn.call( obj.constructor.prototype || {}, "isPrototypeOf" ) ) {
 			return false;
 		}
 
-		// If the function hasn't returned already, we're confident that
-		// |obj| is a plain object, created by {} or constructed with new Object
-		return true;
+		// Own properties are enumerated firstly, so to speed up,
+		// if last one is own, then all properties are own
+		for ( key in obj ) {}
+
+		return key === undefined || hasOwn.call( obj, key );
 	},
 
 	isEmptyObject: function( obj ) {
@@ -12721,7 +12726,7 @@ function on( elem, types, selector, data, fn, one ) {
 	if ( fn === false ) {
 		fn = returnFalse;
 	} else if ( !fn ) {
-		return this;
+		return elem;
 	}
 
 	if ( one === 1 ) {
@@ -13370,14 +13375,14 @@ var
 	rscriptTypeMasked = /^true\/(.*)/,
 	rcleanScript = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
 
+// Manipulating tables requires a tbody
 function manipulationTarget( elem, content ) {
-	if ( jQuery.nodeName( elem, "table" ) &&
-		jQuery.nodeName( content.nodeType !== 11 ? content : content.firstChild, "tr" ) ) {
+	return jQuery.nodeName( elem, "table" ) &&
+		jQuery.nodeName( content.nodeType !== 11 ? content : content.firstChild, "tr" ) ?
 
-		return elem.getElementsByTagName( "tbody" )[ 0 ] || elem;
-	}
-
-	return elem;
+		elem.getElementsByTagName( "tbody" )[ 0 ] ||
+			elem.appendChild( elem.ownerDocument.createElement( "tbody" ) ) :
+		elem;
 }
 
 // Replace/restore the type attribute of script elements for safe DOM manipulation
@@ -13884,7 +13889,7 @@ var getStyles = function( elem ) {
 		// FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
 		var view = elem.ownerDocument.defaultView;
 
-		if ( !view.opener ) {
+		if ( !view || !view.opener ) {
 			view = window;
 		}
 
@@ -14033,15 +14038,18 @@ function curCSS( elem, name, computed ) {
 		style = elem.style;
 
 	computed = computed || getStyles( elem );
+	ret = computed ? computed.getPropertyValue( name ) || computed[ name ] : undefined;
+
+	// Support: Opera 12.1x only
+	// Fall back to style even without computed
+	// computed is undefined for elems on document fragments
+	if ( ( ret === "" || ret === undefined ) && !jQuery.contains( elem.ownerDocument, elem ) ) {
+		ret = jQuery.style( elem, name );
+	}
 
 	// Support: IE9
 	// getPropertyValue is only needed for .css('filter') (#12537)
 	if ( computed ) {
-		ret = computed.getPropertyValue( name ) || computed[ name ];
-
-		if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
-			ret = jQuery.style( elem, name );
-		}
 
 		// A tribute to the "awesome hack by Dean Edwards"
 		// Android Browser returns percentage for some values,
@@ -15564,6 +15572,12 @@ jQuery.extend( {
 	}
 } );
 
+// Support: IE <=11 only
+// Accessing the selectedIndex property
+// forces the browser to respect setting selected
+// on the option
+// The getter ensures a default option is selected
+// when in an optgroup
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
@@ -15572,6 +15586,16 @@ if ( !support.optSelected ) {
 				parent.parentNode.selectedIndex;
 			}
 			return null;
+		},
+		set: function( elem ) {
+			var parent = elem.parentNode;
+			if ( parent ) {
+				parent.selectedIndex;
+
+				if ( parent.parentNode ) {
+					parent.parentNode.selectedIndex;
+				}
+			}
 		}
 	};
 }
@@ -15766,7 +15790,8 @@ jQuery.fn.extend( {
 
 
 
-var rreturn = /\r/g;
+var rreturn = /\r/g,
+	rspaces = /[\x20\t\r\n\f]+/g;
 
 jQuery.fn.extend( {
 	val: function( value ) {
@@ -15842,9 +15867,15 @@ jQuery.extend( {
 		option: {
 			get: function( elem ) {
 
-				// Support: IE<11
-				// option.value not trimmed (#14858)
-				return jQuery.trim( elem.value );
+				var val = jQuery.find.attr( elem, "value" );
+				return val != null ?
+					val :
+
+					// Support: IE10-11+
+					// option.text throws exceptions (#14686, #14858)
+					// Strip and collapse whitespace
+					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
+					jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
 			}
 		},
 		select: {
@@ -15897,7 +15928,7 @@ jQuery.extend( {
 				while ( i-- ) {
 					option = options[ i ];
 					if ( option.selected =
-							jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
+						jQuery.inArray( jQuery.valHooks.option.get( option ), values ) > -1
 					) {
 						optionSet = true;
 					}
@@ -16091,7 +16122,7 @@ jQuery.extend( jQuery.event, {
 				// But now, this "simulate" function is used only for events
 				// for which stopPropagation() is noop, so there is no need for that anymore.
 				//
-				// For the compat branch though, guard for "click" and "submit"
+				// For the 1.x branch though, guard for "click" and "submit"
 				// events is still used, but was moved to jQuery.event.stopPropagation function
 				// because `originalEvent` should point to the original event for the constancy
 				// with other events and for more focused logic
@@ -17592,18 +17623,6 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 
 
 
-// Support: Safari 8+
-// In Safari 8 documents created via document.implementation.createHTMLDocument
-// collapse sibling forms: the second one becomes a child of the first one.
-// Because of that, this security measure has to be disabled in Safari 8.
-// https://bugs.webkit.org/show_bug.cgi?id=137337
-support.createHTMLDocument = ( function() {
-	var body = document.implementation.createHTMLDocument( "" ).body;
-	body.innerHTML = "<form></form><form></form>";
-	return body.childNodes.length === 2;
-} )();
-
-
 // Argument "data" should be string of html
 // context (optional): If specified, the fragment will be created in this context,
 // defaults to document
@@ -17616,12 +17635,7 @@ jQuery.parseHTML = function( data, context, keepScripts ) {
 		keepScripts = context;
 		context = false;
 	}
-
-	// Stop scripts or inline event handlers from being executed immediately
-	// by using document.implementation
-	context = context || ( support.createHTMLDocument ?
-		document.implementation.createHTMLDocument( "" ) :
-		document );
+	context = context || document;
 
 	var parsed = rsingleTag.exec( data ),
 		scripts = !keepScripts && [];
@@ -17703,7 +17717,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}
@@ -17861,11 +17875,8 @@ jQuery.fn.extend( {
 			}
 
 			// Add offsetParent borders
-			// Subtract offsetParent scroll positions
-			parentOffset.top += jQuery.css( offsetParent[ 0 ], "borderTopWidth", true ) -
-				offsetParent.scrollTop();
-			parentOffset.left += jQuery.css( offsetParent[ 0 ], "borderLeftWidth", true ) -
-				offsetParent.scrollLeft();
+			parentOffset.top += jQuery.css( offsetParent[ 0 ], "borderTopWidth", true );
+			parentOffset.left += jQuery.css( offsetParent[ 0 ], "borderLeftWidth", true );
 		}
 
 		// Subtract parent offsets and element margins
@@ -18552,8 +18563,8 @@ module.exports = Array.isArray || function (arr) {
    *   page('/from', '/to')
    *   page();
    *
-   * @param {String|Function} path
-   * @param {Function} fn...
+   * @param {string|!Function|!Object} path
+   * @param {Function=} fn
    * @api public
    */
 
@@ -18565,7 +18576,7 @@ module.exports = Array.isArray || function (arr) {
 
     // route <path> to <callback ...>
     if ('function' === typeof fn) {
-      var route = new Route(path);
+      var route = new Route(/** @type {string} */ (path));
       for (var i = 1; i < arguments.length; ++i) {
         page.callbacks.push(route.middleware(arguments[i]));
       }
@@ -18587,7 +18598,7 @@ module.exports = Array.isArray || function (arr) {
 
   /**
    * Current path being processed
-   * @type {String}
+   * @type {string}
    */
   page.current = '';
 
@@ -18605,7 +18616,7 @@ module.exports = Array.isArray || function (arr) {
   /**
    * Get or set basepath to `path`.
    *
-   * @param {String} path
+   * @param {string} path
    * @api public
    */
 
@@ -18661,10 +18672,11 @@ module.exports = Array.isArray || function (arr) {
   /**
    * Show `path` with optional `state` object.
    *
-   * @param {String} path
-   * @param {Object} state
-   * @param {Boolean} dispatch
-   * @return {Context}
+   * @param {string} path
+   * @param {Object=} state
+   * @param {boolean=} dispatch
+   * @param {boolean=} push
+   * @return {!Context}
    * @api public
    */
 
@@ -18680,8 +18692,8 @@ module.exports = Array.isArray || function (arr) {
    * Goes back in the history
    * Back should always let the current route push state and then go back.
    *
-   * @param {String} path - fallback path to go back if no more history exists, if undefined defaults to page.base
-   * @param {Object} [state]
+   * @param {string} path - fallback path to go back if no more history exists, if undefined defaults to page.base
+   * @param {Object=} state
    * @api public
    */
 
@@ -18707,8 +18719,8 @@ module.exports = Array.isArray || function (arr) {
    * Register route to redirect from one path to other
    * or just redirect to another route
    *
-   * @param {String} from - if param 'to' is undefined redirects to 'from'
-   * @param {String} [to]
+   * @param {string} from - if param 'to' is undefined redirects to 'from'
+   * @param {string=} to
    * @api public
    */
   page.redirect = function(from, to) {
@@ -18716,7 +18728,7 @@ module.exports = Array.isArray || function (arr) {
     if ('string' === typeof from && 'string' === typeof to) {
       page(from, function(e) {
         setTimeout(function() {
-          page.replace(to);
+          page.replace(/** @type {!string} */ (to));
         }, 0);
       });
     }
@@ -18732,9 +18744,11 @@ module.exports = Array.isArray || function (arr) {
   /**
    * Replace `path` with optional `state` object.
    *
-   * @param {String} path
-   * @param {Object} state
-   * @return {Context}
+   * @param {string} path
+   * @param {Object=} state
+   * @param {boolean=} init
+   * @param {boolean=} dispatch
+   * @return {!Context}
    * @api public
    */
 
@@ -18751,10 +18765,9 @@ module.exports = Array.isArray || function (arr) {
   /**
    * Dispatch the given `ctx`.
    *
-   * @param {Object} ctx
+   * @param {Context} ctx
    * @api private
    */
-
   page.dispatch = function(ctx) {
     var prev = prevContext,
       i = 0,
@@ -18794,7 +18807,6 @@ module.exports = Array.isArray || function (arr) {
    * @param {Context} ctx
    * @api private
    */
-
   function unhandled(ctx) {
     if (ctx.handled) return;
     var current;
@@ -18833,7 +18845,7 @@ module.exports = Array.isArray || function (arr) {
    * Accommodates whitespace in both x-www-form-urlencoded
    * and regular percent-encoded form.
    *
-   * @param {str} URL component to decode
+   * @param {string} val - URL component to decode
    */
   function decodeURLEncodedURIComponent(val) {
     if (typeof val !== 'string') { return val; }
@@ -18844,8 +18856,9 @@ module.exports = Array.isArray || function (arr) {
    * Initialize a new "request" `Context`
    * with the given `path` and optional initial `state`.
    *
-   * @param {String} path
-   * @param {Object} state
+   * @constructor
+   * @param {string} path
+   * @param {Object=} state
    * @api public
    */
 
@@ -18911,8 +18924,9 @@ module.exports = Array.isArray || function (arr) {
    *   - `sensitive`    enable case-sensitive routes
    *   - `strict`       enable strict matching for trailing slashes
    *
-   * @param {String} path
-   * @param {Object} options.
+   * @constructor
+   * @param {string} path
+   * @param {Object=} options
    * @api private
    */
 
@@ -18922,8 +18936,7 @@ module.exports = Array.isArray || function (arr) {
     this.method = 'GET';
     this.regexp = pathtoRegexp(this.path,
       this.keys = [],
-      options.sensitive,
-      options.strict);
+      options);
   }
 
   /**
@@ -18953,9 +18966,9 @@ module.exports = Array.isArray || function (arr) {
    * Check if this route matches `path`, if so
    * populate `params`.
    *
-   * @param {String} path
+   * @param {string} path
    * @param {Object} params
-   * @return {Boolean}
+   * @return {boolean}
    * @api private
    */
 
@@ -19021,7 +19034,8 @@ module.exports = Array.isArray || function (arr) {
 
 
     // ensure link
-    var el = e.target;
+    // use shadow dom when available
+    var el = e.path ? e.path[0] : e.target;
     while (el && 'A' !== el.nodeName) el = el.parentNode;
     if (!el || 'A' !== el.nodeName) return;
 
@@ -19600,9 +19614,6 @@ window.app = new App();
 },{"../../node_modules/jquery/dist/jquery":47,"../../node_modules/page/page":50,"./core/controller":52,"handlebars":33}],52:[function(require,module,exports){
 var Master = require('../partials/master');
 var Home = require('../views/home');
-var Contact = require('../views/contact');
-var About = require('../views/about');
-var NotFound = require('../views/notfound');
 
 var Controller = function Controller(app) {
     this.current;
@@ -19610,9 +19621,6 @@ var Controller = function Controller(app) {
         this.masterPage();
 
         app.router('/', this.prerender.bind(this), this.home.bind(this));
-        app.router('/contact', this.prerender.bind(this), this.contact.bind(this));
-        app.router('/about', this.prerender.bind(this), this.about.bind(this));
-        app.router('*', this.notFound.bind(this));
         app.router.exit('*', this.exit.bind(this));
         app.router();
     };
@@ -19657,7 +19665,7 @@ var Controller = function Controller(app) {
         }.bind(this), 10);
     };
     this.animateInComplete = function() {
-        console.log('controller animateInComplete');
+        return true;
     };
     this.prerender = function(ctx, next) {
         next();
@@ -19665,35 +19673,10 @@ var Controller = function Controller(app) {
     this.home = function(ctx, next) {
         this.createView(Home);
     };
-    this.contact = function(ctx, next) {
-        this.createView(Contact);
-    };
-    this.about = function(ctx, next) {
-        this.createView(About);
-    };
-    this.notFound = function(ctx, next) {
-        this.createView(NotFound);
-    };
 };
 
 module.exports = Controller;
-},{"../partials/master":62,"../views/about":64,"../views/contact":65,"../views/home":66,"../views/notfound":67}],53:[function(require,module,exports){
-var AboutModel = function AboutModel() {
-    'use strict'
-    this.title = 'About';
-};
-
-
-module.exports = AboutModel;
-},{}],54:[function(require,module,exports){
-var ContactModel = function ContactModel() {
-    'use strict'
-    this.title = 'Contact';
-};
-
-
-module.exports = ContactModel;
-},{}],55:[function(require,module,exports){
+},{"../partials/master":58,"../views/home":59}],53:[function(require,module,exports){
 var FooterModel = function FooterModel() {
 	'use strict';
     this.title = 'Footer';
@@ -19701,7 +19684,7 @@ var FooterModel = function FooterModel() {
 
 
 module.exports = FooterModel;
-},{}],56:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var HeaderModel = function HeaderModel() {
 	'use strict';
     this.title = 'Header';
@@ -19709,41 +19692,14 @@ var HeaderModel = function HeaderModel() {
 
 
 module.exports = HeaderModel;
-},{}],57:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var HomeModel = function HomeModel() {
     this.title = 'Home';
 };
 
 
 module.exports = HomeModel;
-},{}],58:[function(require,module,exports){
-var MenuModel = function MenuModel() {
-    this.links = [{
-        label: 'Home',
-        href: '/'
-    }, {
-        label: 'Contact',
-        href: '/contact'
-    }, {
-        label: 'About',
-        href: '/about'
-    }, {
-        label: 'Not Found',
-        href: '/---'
-    }, ];
-};
-
-
-module.exports = MenuModel;
-},{}],59:[function(require,module,exports){
-var NotFoundModel = function NotFoundModel() {
-    this.title = 'Oops!';
-    this.returnUrl = '/';
-};
-
-
-module.exports = NotFoundModel;
-},{}],60:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var template = require('../../../src/templates/footer.html');
 var Model = require('../models/footer-model');
 var Footer = function Header(app) {
@@ -19758,7 +19714,7 @@ var Footer = function Header(app) {
 };
 
 module.exports = Footer;
-},{"../../../src/templates/footer.html":70,"../models/footer-model":55}],61:[function(require,module,exports){
+},{"../../../src/templates/footer.html":60,"../models/footer-model":53}],57:[function(require,module,exports){
 var template = require('../../../src/templates/header.html');
 var Model = require('../models/header-model');
 
@@ -19774,24 +19730,21 @@ var Header = function Header(app) {
 };
 
 module.exports = Header;
-},{"../../../src/templates/header.html":71,"../models/header-model":56}],62:[function(require,module,exports){
+},{"../../../src/templates/header.html":61,"../models/header-model":54}],58:[function(require,module,exports){
 var template = require('../../../src/templates/master.html');
 var Model = require('../models/home-model');
 var Header = require('./header');
-var Menu = require('./menu');
 var Footer = require('./footer');
 
 var Master = function Master(app) {
     var view = template;
     this.setup = function() {
         this.header = new Header(app);
-        this.menu = new Menu(app);
         this.footer = new Footer(app);
     };
     this.model = new Model();
     this.view = function() {
         this.model.headerView =  this.header.view();
-        this.model.menuView = this.menu.view();
         this.model.footerView = this.footer.view();
         var view = app.handlebars.compile(template);
         view = view(this.model);
@@ -19801,8 +19754,6 @@ var Master = function Master(app) {
 
         this.header.render();
 
-        this.menu.render();
-
         this.footer.render();
     };
     this.destroy = function() {};
@@ -19810,81 +19761,10 @@ var Master = function Master(app) {
 
 
 module.exports = Master;
-},{"../../../src/templates/master.html":73,"../models/home-model":57,"./footer":60,"./header":61,"./menu":63}],63:[function(require,module,exports){
-var template = require('../../../src/templates/menu.html');
-var Model = require('../models/menu-model');
-var Menu = function Menu(app) {
-    this.model = new Model();
-    this.view = function() {
-        var view = app.handlebars.compile(template);
-        view = view(this.model);
-        return view;
-    };
-    this.render = function() {
-
-    };
-};
-
-
-module.exports = Menu;
-},{"../../../src/templates/menu.html":74,"../models/menu-model":58}],64:[function(require,module,exports){
-var template = require('../../../src/templates/about.html');
-var Model = require('../models/about-model');
-var About = function About(app) {
-    'use strict'
-
-    this.model = new Model();
-    this.view = function() {
-        var view = app.handlebars.compile(template);
-        view = view(this.model);
-        return view;
-    };
-    this.title = function() {
-        return this.model.title;
-    };
-    this.render = function() {};
-    this.destroy = function() {};
-    this.animateIn = function(complete) {
-        app.controller.content.addClass('content-show');
-        var timeout = setTimeout(function() {
-            clearTimeout(timeout);
-            complete();
-        }, 500);
-    };
-};
-
-
-module.exports = About;
-},{"../../../src/templates/about.html":68,"../models/about-model":53}],65:[function(require,module,exports){
-var template = require('../../../src/templates/contact.html');
-var Model = require('../models/contact-model');
-var Contact = function Contact(app) {
-    'use strict'
-    this.model = new Model();
-    this.view = function() {
-        var view = app.handlebars.compile(template);
-        view = view(this.model);
-        return view;
-    };
-    this.title = function() {
-        return this.model.title;
-    };
-    this.render = function() {};
-    this.destroy = function() {};
-    this.animateIn = function(complete) {
-        app.controller.content.addClass('content-show');
-        var timeout = setTimeout(function() {
-            clearTimeout(timeout);
-            complete();
-        }, 500);
-    };
-};
-
-
-module.exports = Contact;
-},{"../../../src/templates/contact.html":69,"../models/contact-model":54}],66:[function(require,module,exports){
+},{"../../../src/templates/master.html":63,"../models/home-model":55,"./footer":56,"./header":57}],59:[function(require,module,exports){
 var template = require('../../../src/templates/home.html');
 var Model = require('../models/home-model');
+
 var Home = function Home(app) {
     'use strict'
     var button = null;
@@ -19898,77 +19778,89 @@ var Home = function Home(app) {
         return this.model.title;
     };
     this.render = function() {
-        button = app.$('.home').find('button');
-        button.on('click', this.click.bind(this));
-    };
-    this.click = function() {
-        alert('home');
+
+        var player = app.$('iframe');
+        var playerOrigin = '*';
+
+        // Listen for messages from the player
+        if (window.addEventListener) {
+            window.addEventListener('message', onMessageReceived, false);
+        }
+        else {
+            window.attachEvent('onmessage', onMessageReceived, false);
+        }
+
+        function post(action, value) {
+            var data = {
+                  method: action
+              };
+
+              if (value) {
+                data.value = value;
+            }
+
+            var message = JSON.stringify(data);
+            player[0].contentWindow.postMessage(message, playerOrigin);
+        }
+
+        function onMessageReceived(event) {
+            // Handle messages from the vimeo player only
+            if (!(/^https?:\/\/player.vimeo.com/).test(event.origin)) {
+                return false;
+            }
+
+            if (playerOrigin === '*') {
+                playerOrigin = event.origin;
+            }
+
+            var data = JSON.parse(event.data);
+            switch (data.event) {
+                case 'ready':
+                post('addEventListener', 'finish');
+                post('addEventListener', 'playProgress');
+                break;
+
+                case 'playProgress':
+                onPlayProgress(data.data);
+                break;
+
+                case 'finish':
+                console.log('finish');
+                break;
+            }
+        }
+
+        function onPlayProgress(data) {
+            var seconds = parseInt(data.seconds.toString().replace(/\D/,''),10);
+            console.log(seconds);
+            if(seconds>3000) {
+                app.$('.cn-video-nome').addClass('cn-video-nome-show');
+            }
+        }
     };
     this.destroy = function() {
-        button.off('click');
-        button = null;
     };
     this.animateIn = function(complete) {
         app.controller.content.addClass('content-show');
         var timeout = setTimeout(function() {
             clearTimeout(timeout);
-            complete();
+            return complete();
         }, 500);
     };
 };
 
 
 module.exports = Home;
-},{"../../../src/templates/home.html":72,"../models/home-model":57}],67:[function(require,module,exports){
-var template = require('../../../src/templates/notfound.html');
-var Model = require('../models/notfound-model');
-var NotFound = function NotFound(app) {
-    this.model = new Model();
-    this.view = function() {
-        var view = app.handlebars.compile(template);
-        view = view(this.model);
-        return view;
-    };
-    this.title = function() {
-        return this.model.title;
-    };
-    this.render = function() {
-    };
-    this.destroy = function() {
-    };
-    this.animateIn = function(complete) {
-        app.controller.content.addClass('content-show');
-        setTimeout(function() {
-            complete();
-            clearTimeout();
-        }, 500);
-    };
-};
+},{"../../../src/templates/home.html":62,"../models/home-model":55}],60:[function(require,module,exports){
+module.exports = "<!--FOOTER-->\n<div class=\"footer\">\n</div>";
 
+},{}],61:[function(require,module,exports){
+module.exports = "<!--HEADER-->\n<div class=\"header\">\n</div>";
 
-module.exports = NotFound;
-},{"../../../src/templates/notfound.html":75,"../models/notfound-model":59}],68:[function(require,module,exports){
-module.exports = "<!--ABOUT-->\n<div class=\"about\">\n    <h1>{{title}}</h1>\n</div>";
+},{}],62:[function(require,module,exports){
+module.exports = "<!--HOME-->\n<div class=\"home\">\n        <div class=\"cn-video-ph\">\n        \t<div class=\"cn-video-nome\">ION DRIMBA</div>\n        \t<iframe src=\"https://player.vimeo.com/video/76979871?api=1&player_id=player1\" id=\"player1\" style=\"width:100%;border: 0px;\"></iframe>\n        </div>\n</div>";
 
-},{}],69:[function(require,module,exports){
-module.exports = "<!--CONTACT-->\n<div class=\"contact\">\n    <h1>{{title}}</h1>\n</div>";
-
-},{}],70:[function(require,module,exports){
-module.exports = "<!--FOOTER-->\n<div class=\"footer\">\n    <h1>{{title}}</h1>\n</div>";
-
-},{}],71:[function(require,module,exports){
-module.exports = "<!--HEADER-->\n<div class=\"header\">\n    <h1>{{title}}</h1>\n</div>";
-
-},{}],72:[function(require,module,exports){
-module.exports = "<!--HOME-->\n<div class=\"home\">\n    <h1>{{title}}</h1>\n    <button type=\"button\">click</button>\n</div>";
-
-},{}],73:[function(require,module,exports){
-module.exports = "<h1>Browserify Sample</h1> \n{{{headerView}}}\n<hr>\n{{{menuView}}}\n<hr>\n<div class=\"content\">\n    <!--CONTENT ADDED VIA TEMPLATE-->\n</div>\n<hr>\n{{{footerView}}}";
-
-},{}],74:[function(require,module,exports){
-module.exports = "<!--MENU-->\n<div class=\"menu\">\n    {{#each links}}\n    <a href=\"{{href}}\">{{label}}</a> \n    {{/each}}\n</div>";
-
-},{}],75:[function(require,module,exports){
-module.exports = "<!--HOME-->\n<div class=\"notfound\">\n    <h1>{{title}}</h1>\n    <a href=\"{{returnUrl}}\">return to HOME</a>\n</div>";
+},{}],63:[function(require,module,exports){
+module.exports = "{{{headerView}}}\n<div class=\"content\">\n    <!--CONTENT ADDED VIA TEMPLATE-->\n</div>\n{{{footerView}}}";
 
 },{}]},{},[51]);

@@ -1,8 +1,5 @@
 var Master = require('../partials/master');
 var Home = require('../views/home');
-var Contact = require('../views/contact');
-var About = require('../views/about');
-var NotFound = require('../views/notfound');
 
 var Controller = function Controller(app) {
     this.current;
@@ -10,9 +7,6 @@ var Controller = function Controller(app) {
         this.masterPage();
 
         app.router('/', this.prerender.bind(this), this.home.bind(this));
-        app.router('/contact', this.prerender.bind(this), this.contact.bind(this));
-        app.router('/about', this.prerender.bind(this), this.about.bind(this));
-        app.router('*', this.notFound.bind(this));
         app.router.exit('*', this.exit.bind(this));
         app.router();
     };
@@ -64,15 +58,6 @@ var Controller = function Controller(app) {
     };
     this.home = function(ctx, next) {
         this.createView(Home);
-    };
-    this.contact = function(ctx, next) {
-        this.createView(Contact);
-    };
-    this.about = function(ctx, next) {
-        this.createView(About);
-    };
-    this.notFound = function(ctx, next) {
-        this.createView(NotFound);
     };
 };
 
