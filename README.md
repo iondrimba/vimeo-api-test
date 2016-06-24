@@ -4,3 +4,7 @@
 
 
 Testing sync caption
+
+### [Live demo]
+
+[Live demo]:<http://iondrimba.github.io/vimeo-api-test/>
