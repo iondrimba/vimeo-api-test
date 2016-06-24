@@ -353,21 +353,6 @@ td,
 th {
   padding: 0; }
 
-body {
-  font-family: sans-serif;
-  padding: 20px;
-  background-color: #252323;
-  color: #fff; }
-
-.content {
-  opacity: 0;
-  border-radius: 5px; }
-
-.content-show {
-  opacity: 1;
-  -webkit-transition: all .5s;
-  transition: all .5s; }
-
 .home .cn-video-ph {
   max-width: 800px;
   width: 100%;
