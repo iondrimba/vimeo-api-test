@@ -1,14 +1,14 @@
-var Router = require('../../node_modules/page/page');
 var $ = require('../../node_modules/jquery/dist/jquery');
 var handlebars = require('handlebars');
-var Controller = require('./core/controller');
+var Home = require('./views/home.js');
 
 function App() {
 	this.$ = $;
-	this.router = Router;
 	this.handlebars = handlebars;
-	this.controller = new Controller(this);
-	this.controller.start();
+	this.home = new Home(this);
+
+	$('body').html(this.home.view());
+	this.home.render();
 };
 
 window.app = new App();

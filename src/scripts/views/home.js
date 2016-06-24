@@ -87,13 +87,6 @@ var Home = function Home(app) {
         }
     };
     this.destroy = function() {};
-    this.animateIn = function(complete) {
-        app.controller.content.addClass('content-show');
-        var timeout = setTimeout(function() {
-            clearTimeout(timeout);
-            return complete();
-        }, 500);
-    };
 };
 
 

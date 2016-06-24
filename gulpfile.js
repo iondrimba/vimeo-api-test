@@ -13,13 +13,13 @@ var minor = semver.inc(pckg.version, 'minor');
 var major = semver.inc(pckg.version, 'major');
 
 // bump versions on package
-gulp.task('minor', function () {
+gulp.task('minor', function() {
     return bumpPackageJson(minor);
 });
-gulp.task('patch', function () {
+gulp.task('patch', function() {
     return bumpPackageJson(patch);
 });
-gulp.task('major', function () {
+gulp.task('major', function() {
     return bumpPackageJson(major);
 });
 
@@ -42,7 +42,7 @@ function bumpAppFiles(version) {
     renameMe(options);
 }
 
-// using vinyl-source-stream: 
+// using vinyl-source-stream:
 gulp.task('browserify', require('./tasks/browserify.js'));
 
 //copies index.html file to public folder
@@ -66,7 +66,7 @@ gulp.task('sass', require('./tasks/sass.js'));
 //watch js/scss/teplate files
 gulp.task('watch', require('./tasks/watch.js'));
 
-//html min 
+//html min
 gulp.task('html-min', require('./tasks/html-min.js'));
 
 //post css
@@ -93,10 +93,10 @@ gulp.task('bump-major', gulpsync.sync(['major']), function renameMajor() {
 });
 
 // development task
-gulp.task('default', gulpsync.sync(['copy', 'scsslint', 'sass', 'lint', 'browserify', 'browser-sync', 'watch']));
+gulp.task('default', gulpsync.sync(['copy', 'lint', 'browserify', 'browser-sync', 'watch']));
 
 // deploy task
-gulp.task('deploy', gulpsync.sync(['copy', 'scsslint', 'sass', 'lint', 'browserify', 'html-min', 'imagemin']));
+gulp.task('deploy', gulpsync.sync(['copy', 'lint', 'browserify']));
 
 // continuous integration task
-gulp.task('travis', gulpsync.sync(['copy', 'scsslint', 'sass', 'lint', 'browserify', 'coveralls', 'imagemin', 'html-min', 'uglify']));
+gulp.task('travis', gulpsync.sync(['copy', 'lint', 'browserify', 'coveralls']));
