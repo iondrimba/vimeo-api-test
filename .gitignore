@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+public/js/*.js
+public/css/*.css
+public/index.html
+test/
+npm-debug.log
