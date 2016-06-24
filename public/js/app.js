@@ -232,12 +232,40 @@ var substr = 'ab'.substr(-1) === 'b'
 // shim for using process in browser
 
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+(function () {
+  try {
+    cachedSetTimeout = setTimeout;
+  } catch (e) {
+    cachedSetTimeout = function () {
+      throw new Error('setTimeout is not defined');
+    }
+  }
+  try {
+    cachedClearTimeout = clearTimeout;
+  } catch (e) {
+    cachedClearTimeout = function () {
+      throw new Error('clearTimeout is not defined');
+    }
+  }
+} ())
 var queue = [];
 var draining = false;
 var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
@@ -253,7 +281,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -270,7 +298,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    cachedClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -282,7 +310,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        cachedSetTimeout(drainQueue, 0);
     }
 };
 
@@ -8241,7 +8269,7 @@ module.exports = Array.isArray || function (arr) {
 
 },{}],47:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.3
+ * jQuery JavaScript Library v2.2.4
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -8251,7 +8279,7 @@ module.exports = Array.isArray || function (arr) {
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-04-05T19:26Z
+ * Date: 2016-05-20T17:23Z
  */
 
 (function( global, factory ) {
@@ -8307,7 +8335,7 @@ var support = {};
 
 
 var
-	version = "2.2.3",
+	version = "2.2.4",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -13248,13 +13276,14 @@ jQuery.Event.prototype = {
 	isDefaultPrevented: returnFalse,
 	isPropagationStopped: returnFalse,
 	isImmediatePropagationStopped: returnFalse,
+	isSimulated: false,
 
 	preventDefault: function() {
 		var e = this.originalEvent;
 
 		this.isDefaultPrevented = returnTrue;
 
-		if ( e ) {
+		if ( e && !this.isSimulated ) {
 			e.preventDefault();
 		}
 	},
@@ -13263,7 +13292,7 @@ jQuery.Event.prototype = {
 
 		this.isPropagationStopped = returnTrue;
 
-		if ( e ) {
+		if ( e && !this.isSimulated ) {
 			e.stopPropagation();
 		}
 	},
@@ -13272,7 +13301,7 @@ jQuery.Event.prototype = {
 
 		this.isImmediatePropagationStopped = returnTrue;
 
-		if ( e ) {
+		if ( e && !this.isSimulated ) {
 			e.stopImmediatePropagation();
 		}
 
@@ -14202,19 +14231,6 @@ function getWidthOrHeight( elem, name, extra ) {
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
-
-	// Support: IE11 only
-	// In IE 11 fullscreen elements inside of an iframe have
-	// 100x too small dimensions (gh-1764).
-	if ( document.msFullscreenElement && window.top !== window ) {
-
-		// Support: IE11 only
-		// Running getBoundingClientRect on a disconnected node
-		// in IE throws an error.
-		if ( elem.getClientRects().length ) {
-			val = Math.round( elem.getBoundingClientRect()[ name ] * 100 );
-		}
-	}
 
 	// Some non-html elements return undefined for offsetWidth, so check for null/undefined
 	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
@@ -16106,6 +16122,7 @@ jQuery.extend( jQuery.event, {
 	},
 
 	// Piggyback on a donor event to simulate a different one
+	// Used only for `focus(in | out)` events
 	simulate: function( type, elem, event ) {
 		var e = jQuery.extend(
 			new jQuery.Event(),
@@ -16113,27 +16130,10 @@ jQuery.extend( jQuery.event, {
 			{
 				type: type,
 				isSimulated: true
-
-				// Previously, `originalEvent: {}` was set here, so stopPropagation call
-				// would not be triggered on donor event, since in our own
-				// jQuery.event.stopPropagation function we had a check for existence of
-				// originalEvent.stopPropagation method, so, consequently it would be a noop.
-				//
-				// But now, this "simulate" function is used only for events
-				// for which stopPropagation() is noop, so there is no need for that anymore.
-				//
-				// For the 1.x branch though, guard for "click" and "submit"
-				// events is still used, but was moved to jQuery.event.stopPropagation function
-				// because `originalEvent` should point to the original event for the constancy
-				// with other events and for more focused logic
 			}
 		);
 
 		jQuery.event.trigger( e, null, elem );
-
-		if ( e.isDefaultPrevented() ) {
-			event.preventDefault();
-		}
 	}
 
 } );
@@ -19785,17 +19785,16 @@ var Home = function Home(app) {
         // Listen for messages from the player
         if (window.addEventListener) {
             window.addEventListener('message', onMessageReceived, false);
-        }
-        else {
+        } else {
             window.attachEvent('onmessage', onMessageReceived, false);
         }
 
         function post(action, value) {
             var data = {
-                  method: action
-              };
+                method: action
+            };
 
-              if (value) {
+            if (value) {
                 data.value = value;
             }
 
@@ -19816,43 +19815,42 @@ var Home = function Home(app) {
             var data = JSON.parse(event.data);
             switch (data.event) {
                 case 'ready':
-                post('addEventListener', 'finish');
-                post('addEventListener', 'playProgress');
-                break;
+                    post('addEventListener', 'finish');
+                    post('addEventListener', 'playProgress');
+                    break;
 
                 case 'playProgress':
-                onPlayProgress(data.data);
-                break;
+                    onPlayProgress(data.data);
+                    break;
 
                 case 'finish':
-                console.log('finish');
-                break;
+                    console.log('finish');
+                    break;
             }
         }
 
         function onPlayProgress(data) {
-            var seconds = parseInt(data.seconds.toString().replace(/\D/,''),10);
+            var seconds = parseInt(data.seconds.toString().replace(/\D/, ''), 10);
             console.log(seconds);
-            if(seconds>2000) {
+            if (seconds > 2000) {
                 app.$('.cn-video-nome').addClass('show');
             }
 
-            if(seconds>4000){
-             app.$('.cn-video-nome').addClass('hide');
+            if (seconds > 4000) {
+                app.$('.cn-video-nome').addClass('hide');
             }
 
-            if(seconds>6000) {
-                app.$('.cn-video-nome').text('Voltei!');
+            if (seconds > 6000) {
+                app.$('.cn-video-nome').text('ANOTHER CAPTION!');
                 app.$('.cn-video-nome').removeClass('hide').addClass('show');
             }
-            if(seconds>8000) {
+            if (seconds > 8000) {
                 app.$('.cn-video-nome').text('Voltei!');
                 app.$('.cn-video-nome').addClass('hide');
             }
         }
     };
-    this.destroy = function() {
-    };
+    this.destroy = function() {};
     this.animateIn = function(complete) {
         app.controller.content.addClass('content-show');
         var timeout = setTimeout(function() {
@@ -19871,7 +19869,7 @@ module.exports = "<!--FOOTER-->\n<div class=\"footer\">\n</div>";
 module.exports = "<!--HEADER-->\n<div class=\"header\">\n</div>";
 
 },{}],62:[function(require,module,exports){
-module.exports = "<!--HOME-->\n<div class=\"home\">\n        <div class=\"cn-video-ph\">\n        \t<div class=\"cn-video-nome\">ION DRIMBA</div>\n        \t<iframe src=\"https://player.vimeo.com/video/76979871?api=1&player_id=player1\" id=\"player1\" style=\"width:100%;border: 0px;\"></iframe>\n        </div>\n</div>";
+module.exports = "<!--HOME-->\n<div class=\"home\">\n        <div class=\"cn-video-ph\">\n        \t<div class=\"cn-video-nome\">HELLO</div>\n        \t<iframe src=\"https://player.vimeo.com/video/76979871?api=1&player_id=player1\" id=\"player1\" style=\"width:100%;border: 0px;\"></iframe>\n        </div>\n</div>";
 
 },{}],63:[function(require,module,exports){
 module.exports = "{{{headerView}}}\n<div class=\"content\">\n    <!--CONTENT ADDED VIA TEMPLATE-->\n</div>\n{{{footerView}}}";

@@ -21,17 +21,16 @@ var Home = function Home(app) {
         // Listen for messages from the player
         if (window.addEventListener) {
             window.addEventListener('message', onMessageReceived, false);
-        }
-        else {
+        } else {
             window.attachEvent('onmessage', onMessageReceived, false);
         }
 
         function post(action, value) {
             var data = {
-                  method: action
-              };
+                method: action
+            };
 
-              if (value) {
+            if (value) {
                 data.value = value;
             }
 
@@ -52,43 +51,42 @@ var Home = function Home(app) {
             var data = JSON.parse(event.data);
             switch (data.event) {
                 case 'ready':
-                post('addEventListener', 'finish');
-                post('addEventListener', 'playProgress');
-                break;
+                    post('addEventListener', 'finish');
+                    post('addEventListener', 'playProgress');
+                    break;
 
                 case 'playProgress':
-                onPlayProgress(data.data);
-                break;
+                    onPlayProgress(data.data);
+                    break;
 
                 case 'finish':
-                console.log('finish');
-                break;
+                    console.log('finish');
+                    break;
             }
         }
 
         function onPlayProgress(data) {
-            var seconds = parseInt(data.seconds.toString().replace(/\D/,''),10);
+            var seconds = parseInt(data.seconds.toString().replace(/\D/, ''), 10);
             console.log(seconds);
-            if(seconds>2000) {
+            if (seconds > 2000) {
                 app.$('.cn-video-nome').addClass('show');
             }
 
-            if(seconds>4000){
-             app.$('.cn-video-nome').addClass('hide');
+            if (seconds > 4000) {
+                app.$('.cn-video-nome').addClass('hide');
             }
 
-            if(seconds>6000) {
-                app.$('.cn-video-nome').text('Voltei!');
+            if (seconds > 6000) {
+                app.$('.cn-video-nome').text('ANOTHER CAPTION!');
                 app.$('.cn-video-nome').removeClass('hide').addClass('show');
             }
-            if(seconds>8000) {
+            if (seconds > 8000) {
                 app.$('.cn-video-nome').text('Voltei!');
                 app.$('.cn-video-nome').addClass('hide');
             }
         }
     };
-    this.destroy = function() {
-    };
+    this.destroy = function() {};
     this.animateIn = function(complete) {
         app.controller.content.addClass('content-show');
         var timeout = setTimeout(function() {
